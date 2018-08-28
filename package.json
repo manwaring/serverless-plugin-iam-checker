@@ -1,13 +1,15 @@
 {
   "name": "serverless-plugin-iam-checker",
   "description": "A serverless plugin to check IAM policies for security compliance",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "publish-please": "publish-please",
-    "prepublishOnly": "publish-please guard"
+    "prepublishOnly": "tsc",
+    "prepublish": "publish-please guard && rimraf dist/**"
   },
   "devDependencies": {
     "publish-please": "^3.2.0",
+    "rimraf": "^2.6.2",
     "typescript": "^3.0.1"
   },
   "repository": {

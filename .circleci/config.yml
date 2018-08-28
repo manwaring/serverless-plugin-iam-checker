@@ -53,6 +53,7 @@ workflows:
     jobs:
       - install
       - publish:
+          context: manwaring-npm
           requires:
             - install
           filters:
