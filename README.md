@@ -1,1 +1,1 @@
-# serverless-plugin-iam-star
+# Serverless plugin IAM checker

@@ -1,0 +1,7 @@
+.circleci/
+src/
+.prettierrc.yml
+.gitignore
+.npmignore
+.publishrc
+tsconfig.json
