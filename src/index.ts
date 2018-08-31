@@ -28,7 +28,6 @@ class IamChecker {
 
   checkIam() {
     const resources = this.serverless.service.provider.compiledCloudFormationTemplate.Resources;
-    this.serverless.cli.log(JSON.stringify(resources));
     const roles = [];
     Object.keys(resources).forEach(key => {
       if (resources[key].Type === 'AWS::IAM::Role') {
