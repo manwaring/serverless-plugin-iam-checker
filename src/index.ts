@@ -1,7 +1,10 @@
 class IamChecker {
   constructor(serverless, options) {
     serverless.cli.log("Hello!");
-    serverless.cli.log(`${this.options}`);
+    serverless.cli.log(`${options}`);
+    serverless.cli.log(options);
+    serverless.cli.log(serverless);
+    serverless.cli.log(`${serverless}`);
     this.serverless = serverless;
     this.options = options;
 
