@@ -1,12 +1,7 @@
 class IamChecker {
-  constructor(serverless, options) {
+  constructor(serverless) {
     serverless.cli.log("Hello!");
-    serverless.cli.log(`${options}`);
-    serverless.cli.log(options);
-    serverless.cli.log(serverless);
-    serverless.cli.log(`${serverless}`);
     this.serverless = serverless;
-    this.options = options;
 
     // this.commands = {
     //   checkIam: {
@@ -30,11 +25,12 @@ class IamChecker {
   }
 
   serverless: any;
-  options: any;
-  commands: any;
   hooks: any;
 
   beforeWelcome() {
+    this.serverless.cli.log(
+      this.serverless.service.provider.compiledCloudFormationTemplate
+    );
     this.serverless.cli.log("Hello from Serverless!");
   }
 }
