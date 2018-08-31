@@ -1,7 +1,7 @@
-export default class IamChecker {
+class IamChecker {
   constructor(serverless, options) {
-    this.serverless.cli.log("Hello!");
-    this.serverless.cli.log(`${this.options}`);
+    serverless.cli.log("Hello!");
+    serverless.cli.log(`${this.options}`);
     this.serverless = serverless;
     this.options = options;
 
@@ -50,3 +50,5 @@ export default class IamChecker {
     this.serverless.cli.log("Please come again!");
   }
 }
+
+export = IamChecker;
