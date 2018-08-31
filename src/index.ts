@@ -29,7 +29,13 @@ class IamChecker {
   checkIam() {
     const resources = this.serverless.service.provider.compiledCloudFormationTemplate.Resources;
     this.serverless.cli.log(JSON.stringify(resources));
-    const roles = resources.filter(resource => resource.Type === 'AWS::IAM::Role');
+    const roles = [];
+    Object.keys(resources).forEach(key => {
+      if (resources[key].Type === 'AWS::IAM::Role') {
+        roles.push(resources[key]);
+      }
+    });
+    // const roles = resources.filter(resource => resource.Type === 'AWS::IAM::Role');
     roles.forEach(role => this.checkRole(role));
     this.serverless.cli.log('Hello from Serverless!');
   }
