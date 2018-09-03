@@ -70,7 +70,9 @@ class IamChecker {
     const actions = statement.Action;
     const resources = statement.Resource;
     const starActions = actions.find(action => action && action.indexOf('*') > -1);
-    const starResources = resources.find(resource => resource && resource.indexOf('*') > -1);
+    const starResources = resources.find(
+      resource => (resource = JSON.stringify(resource) && resource.indexOf('*') > -1)
+    );
     if (starActions.length > 0 || starResources.length > 0) {
       throw new this.serverless.classes.Error(`Actions or resources contain *`);
     }
