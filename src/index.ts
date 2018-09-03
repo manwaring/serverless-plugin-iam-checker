@@ -30,9 +30,8 @@ class IamChecker {
     let resources = this.serverless.service.provider.compiledCloudFormationTemplate.Resources;
     const roles = [];
     const keys = Object.keys(resources);
-    this.log(JSON.stringify(resources));
+    this.log(resources);
     this.log(keys);
-    this.log(JSON.stringify(keys));
     Object.keys(resources).forEach(key => {
       this.log(key);
       if (resources[key].Type === 'AWS::IAM::Role') {
@@ -70,8 +69,8 @@ class IamChecker {
     }
   }
 
-  log(...args) {
-    this.serverless.cli.log(args);
+  log(message: any) {
+    this.serverless.cli.log(JSON.stringify(message));
   }
 }
 
