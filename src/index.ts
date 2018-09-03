@@ -28,19 +28,24 @@ class IamChecker {
 
   checkIam() {
     let resources = this.serverless.service.provider.compiledCloudFormationTemplate.Resources;
-    const roles = [];
+    let roles = [];
     const keys = Object.keys(resources);
     this.log(resources);
     this.log(keys);
     Object.keys(resources).forEach(key => {
       this.log(key);
-      if (resources[key].Type === 'AWS::IAM::Role') {
+      this.log(resources[key].Type);
+      this.log(resources[key]['Type']);
+      if (resources[key]['Type'] === 'AWS::IAM::Role') {
+        this.log('found an iam role!');
         roles.push(resources[key]);
       }
     });
     // const roles = resources.filter(resource => resource.Type === 'AWS::IAM::Role');
     this.log(roles);
-    roles.forEach(role => this.checkRole(role));
+    if (roles && roles.length) {
+      roles.forEach(role => this.checkRole(role));
+    }
     this.log('Hello from Serverless!');
   }
 
@@ -48,14 +53,18 @@ class IamChecker {
     this.log(role);
     const policies = role.Properties.Policies;
     this.log(policies);
-    policies.forEach(policy => this.checkPolicy(policy));
+    if (policies && policies.length) {
+      policies.forEach(policy => this.checkPolicy(policy));
+    }
   }
 
   checkPolicy(policy: any) {
     this.log(policy);
     const statements = policy.Statement;
     this.log(statements);
-    statements.forEach(statement => this.checkStatement(statement));
+    if (statements && statements.length) {
+      statements.forEach(statement => this.checkStatement(statement));
+    }
   }
 
   checkStatement(statement: any) {
