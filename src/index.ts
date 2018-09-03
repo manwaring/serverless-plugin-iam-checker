@@ -35,9 +35,7 @@ class IamChecker {
     Object.keys(resources).forEach(key => {
       this.log(key);
       this.log(resources[key].Type);
-      this.log(resources[key]['Type']);
-      if (resources[key]['Type'] === 'AWS::IAM::Role') {
-        this.log('found an iam role!');
+      if (resources[key].Type === 'AWS::IAM::Role') {
         roles.push(resources[key]);
       }
     });
@@ -60,7 +58,7 @@ class IamChecker {
 
   checkPolicy(policy: any) {
     this.log(policy);
-    const statements = policy.Statement;
+    const statements = policy.PolicyDocument.Statement;
     this.log(statements);
     if (statements && statements.length) {
       statements.forEach(statement => this.checkStatement(statement));
