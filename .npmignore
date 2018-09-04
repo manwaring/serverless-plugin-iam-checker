@@ -1,6 +1,7 @@
 .circleci/
 src/
-dist/examples/
+dist/sample-resources*
+dist/test*
 examples/
 .prettierrc.yml
 .gitignore

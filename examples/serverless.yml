@@ -3,15 +3,15 @@ service:
 
 plugins:
   - serverless-webpack
-  - serverless-plugin-iam-checker
+  # - serverless-plugin-iam-checker
 
 provider:
   name: aws
   runtime: nodejs8.10
   iamRoleStatements:
     - Effect: Allow
-      Resource: "*"
-      Action: "*"
+      Resource: '*'
+      Action: '*'
 
 functions:
   hello:
