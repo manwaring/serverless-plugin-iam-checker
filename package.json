@@ -1,7 +1,7 @@
 {
   "name": "serverless-plugin-iam-checker",
   "description": "A serverless plugin to check IAM policies for security compliance",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "scripts": {
     "publish-please": "publish-please",
     "prepublish": "tsc && publish-please guard",

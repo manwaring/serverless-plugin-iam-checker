@@ -79,7 +79,7 @@ class IamChecker {
         return action.indexOf('*') > -1;
       });
     } else if (JSON.stringify(actions).indexOf('*') > -1) {
-      starActions.push(actions);
+      starActions = [actions];
     }
     // need to handle when this is a single resource instead of array
     if (Array.isArray(resources)) {
@@ -90,7 +90,7 @@ class IamChecker {
         return resource.indexOf('*') > -1;
       });
     } else if (JSON.stringify(resources).indexOf('*') > -1) {
-      starResources.push(resources);
+      starResources = [resources];
     }
     if ((starActions && starActions.length > 0) || (starResources && starResources.length > 0)) {
       throw new this.serverless.classes.Error(`Actions or resources contain *`);
