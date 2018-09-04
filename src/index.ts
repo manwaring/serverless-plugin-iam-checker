@@ -10,7 +10,7 @@ class IamChecker {
   }
 
   checkIam() {
-    this.log('Checking IAM permissions');
+    this.log('Checking IAM permissions...');
     let resources = this.serverless.service.provider.compiledCloudFormationTemplate.Resources;
     let roles = [];
     const keys = Object.keys(resources);
