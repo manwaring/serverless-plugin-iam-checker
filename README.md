@@ -7,10 +7,8 @@
 [![Known Vulnerabilities][vulnerability-badge]][vulnerability-badge-url]
 [![Dependency Status][dependency-badge]][dependency-badge-url]
 [![devDependency Status][dev-dependency-badge]][dev-dependency-badge-url]
-
-<!-- [![NPM version][latest-version-badge]][latest-version-badge-url]
-[![License][license-badge]][license-badge-url] -->
-
+[![NPM version][latest-version-badge]][latest-version-badge-url]
+[![License][license-badge]][license-badge-url]
 [![Code style][formatter-badge]][formatter-badge-url]
 
 # Serverless plugin IAM checker
@@ -23,12 +21,9 @@
 [dev-dependency-badge-url]: https://david-dm.org/manwaring/serverless-plugin-iam-checker?type=dev
 [formatter-badge]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square
 [formatter-badge-url]: #badge
-
-<!-- [license-badge]: https://img.shields.io/npm/l/@manwaring/lambda-wrapper.svg
-[license-badge-url]: https://www.npmjs.com/package/@manwaring/lambda-wrapper -->
-
+[license-badge]: https://img.shields.io/npm/l/serverless-plugin-iam-checker.svg
+[license-badge-url]: https://www.npmjs.com/package/serverless-plugin-iam-checker
 [vulnerability-badge]: https://snyk.io/test/github/manwaring/serverless-plugin-iam-checker/badge.svg?targetFile=package.json
 [vulnerability-badge-url]: https://snyk.io/test/github/manwaring/serverless-plugin-iam-checker?targetFile=package.json
-
-<!-- [latest-version-badge]: https://img.shields.io/npm/v/%40manwaring%2Flambda-wrapper/latest.svg
-[latest-version-badge-url]: https://npmjs.com/package/@manwaring/lambda-wrapper -->
+[latest-version-badge]: https://img.shields.io/npm/v/serverless-plugin-iam-checker/latest.svg
+[latest-version-badge-url]: https://npmjs.com/package/serverless-plugin-iam-checker

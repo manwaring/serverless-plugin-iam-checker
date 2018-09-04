@@ -1,81 +1,64 @@
 class IamChecker {
+  serverless: any;
+  hooks: any;
+
   constructor(serverless) {
     this.serverless = serverless;
-
-    // this.commands = {
-    //   checkIam: {
-    //     usage: "Checks your Iam policies for * permissions or resources",
-    //     lifecycleEvents: ["hello", "world"],
-    //     options: {
-    //       message: {
-    //         usage:
-    //           "Specify the message you want to deploy " +
-    //           "(e.g. \"--message 'My Message'\" or \"-m 'My Message'\")",
-    //         required: true,
-    //         shortcut: "m"
-    //       }
-    //     }
-    //   }
-    // };
-
     this.hooks = {
       'after:package:createDeploymentArtifacts': this.checkIam.bind(this)
     };
   }
 
-  serverless: any;
-  hooks: any;
-
   checkIam() {
+    this.log('Checking IAM permissions');
     let resources = this.serverless.service.provider.compiledCloudFormationTemplate.Resources;
     let roles = [];
     const keys = Object.keys(resources);
-    this.log(resources);
-    this.log(keys);
+    this.logDebugObject(resources);
+    this.logDebugObject(keys);
     Object.keys(resources).forEach(key => {
-      this.log(key);
-      this.log(resources[key].Type);
+      this.logDebugObject(key);
+      this.logDebugObject(resources[key].Type);
       if (resources[key].Type === 'AWS::IAM::Role') {
         roles.push(resources[key]);
       }
     });
-    // const roles = resources.filter(resource => resource.Type === 'AWS::IAM::Role');
-    this.log(roles);
+    this.logDebugObject(roles);
     if (roles && roles.length) {
       roles.forEach(role => this.checkRole(role));
     }
-    this.log('Hello from Serverless!');
+    this.logDebugObject('Hello from Serverless!');
   }
 
   checkRole(role: any) {
-    this.log(role);
+    this.logDebugObject(role);
     const policies = role.Properties.Policies;
-    this.log(policies);
+    this.logDebugObject(policies);
     if (policies && policies.length) {
       policies.forEach(policy => this.checkPolicy(policy));
     }
   }
 
   checkPolicy(policy: any) {
-    this.log(policy);
+    this.logDebugObject(policy);
     const statements = policy.PolicyDocument.Statement;
-    this.log(statements);
+    this.logDebugObject(statements);
     if (statements && statements.length) {
       statements.forEach(statement => this.checkStatement(statement));
     }
   }
 
   checkStatement(statement: any) {
-    this.log(statement);
+    this.logDebugObject(statement);
     const actions = statement.Action;
     const resources = statement.Resource;
     let starActions, starResources;
     // need to handle when this is a single action instead of array
     if (Array.isArray(actions)) {
       starActions = actions.find(action => {
-        this.log(action);
+        this.logDebugObject(action);
         action = JSON.stringify(action);
-        this.log(action);
+        this.logDebugObject(action);
         return action.indexOf('*') > -1;
       });
     } else if (JSON.stringify(actions).indexOf('*') > -1) {
@@ -84,9 +67,9 @@ class IamChecker {
     // need to handle when this is a single resource instead of array
     if (Array.isArray(resources)) {
       starResources = resources.find(resource => {
-        this.log(resource);
+        this.logDebugObject(resource);
         resource = JSON.stringify(resource);
-        this.log(resource);
+        this.logDebugObject(resource);
         return resource.indexOf('*') > -1;
       });
     } else if (JSON.stringify(resources).indexOf('*') > -1) {
@@ -97,8 +80,14 @@ class IamChecker {
     }
   }
 
-  log(message: any) {
-    this.serverless.cli.log(JSON.stringify(message));
+  log(message: string) {
+    this.serverless.cli.log(message);
+  }
+
+  logDebugObject(message: any) {
+    if (process.env.SLS_DEBUG) {
+      this.serverless.cli.log(JSON.stringify(message));
+    }
   }
 }
 
