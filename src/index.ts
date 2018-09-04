@@ -69,18 +69,29 @@ class IamChecker {
     this.log(statement);
     const actions = statement.Action;
     const resources = statement.Resource;
-    const starActions = actions.find(action => {
-      this.log(action);
-      action = JSON.stringify(action);
-      this.log(action);
-      return action.indexOf('*') > -1;
-    });
-    const starResources = resources.find(resource => {
-      this.log(resource);
-      resource = JSON.stringify(resource);
-      this.log(resource);
-      return resource.indexOf('*') > -1;
-    });
+    let starActions, starResources;
+    // need to handle when this is a single action instead of array
+    if (Array.isArray(actions)) {
+      starActions = actions.find(action => {
+        this.log(action);
+        action = JSON.stringify(action);
+        this.log(action);
+        return action.indexOf('*') > -1;
+      });
+    } else if (JSON.stringify(actions).indexOf('*') > -1) {
+      starActions.push(actions);
+    }
+    // need to handle when this is a single resource instead of array
+    if (Array.isArray(resources)) {
+      starResources = resources.find(resource => {
+        this.log(resource);
+        resource = JSON.stringify(resource);
+        this.log(resource);
+        return resource.indexOf('*') > -1;
+      });
+    } else if (JSON.stringify(resources).indexOf('*') > -1) {
+      starResources.push(resources);
+    }
     if ((starActions && starActions.length > 0) || (starResources && starResources.length > 0)) {
       throw new this.serverless.classes.Error(`Actions or resources contain *`);
     }
