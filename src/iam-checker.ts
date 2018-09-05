@@ -19,7 +19,7 @@ class IamChecker {
     const invalidRoles = resources.getIamRoles().filter(role => role.isInvalid());
     if (invalidRoles && invalidRoles.length > 0) {
       const message = invalidRoles.reduce(
-        (msg: string, role: Role, index: number) => `${msg}${index > 0 ? ', ' : ''}${role.resourceName}`,
+        (msg, role, index) => `${msg}${index > 0 ? ', ' : ''}${role.resourceName}`,
         'The following roles have invalid configurations: '
       );
       throw new this.serverless.classes.Error(message);
