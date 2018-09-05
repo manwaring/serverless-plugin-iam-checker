@@ -2,10 +2,12 @@ import { Resources, Role } from './lib/cloudformation';
 
 class IamChecker {
   serverless: any;
+  config: any;
   hooks: any;
 
   constructor(serverless) {
     this.serverless = serverless;
+    this.config = (serverless.service.custom && serverless.service.custom.iamChecker) || {};
     this.hooks = {
       'after:package:createDeploymentArtifacts': this.checkIam.bind(this)
     };
@@ -28,7 +30,7 @@ class IamChecker {
     this.serverless.cli.log(message);
   }
 
-  logDebugObject(message: string) {
+  debug(message: string) {
     if (process.env.SLS_DEBUG) {
       this.serverless.cli.log(message);
     }
