@@ -53,7 +53,7 @@ export class Role implements Resource {
   }
 
   getStarItems(items: string[]): string[] {
-    return items.filter(item => item.indexOf('*') > -1);
+    return items.filter(item => item.replace(/'/g, '').replace(/"/g, '') === '*');
   }
 }
 
