@@ -1,4 +1,4 @@
-const compiledCloudFormationTemplate = {
+export const template = {
   AWSTemplateFormatVersion: '2010-09-09',
   Description: 'The AWS CloudFormation template for this Serverless application',
   Resources: {
@@ -246,19 +246,5 @@ const compiledCloudFormationTemplate = {
         ]
       }
     }
-  }
-};
-
-export const serverless = {
-  service: {
-    provider: {
-      compiledCloudFormationTemplate
-    }
-  },
-  cli: {
-    log: console.log
-  },
-  classes: {
-    Error: Error
   }
 };

@@ -1,8 +1,8 @@
 .circleci/
-src/
-dist/sample-resources*
-dist/test*
+dist/mock-data/
+dist/*.test*
 examples/
+src/
 .prettierrc.yml
 .gitignore
 .npmignore

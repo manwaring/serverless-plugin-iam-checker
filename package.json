@@ -1,14 +1,20 @@
 {
   "name": "serverless-plugin-iam-checker",
   "description": "A serverless plugin to check IAM policies for security compliance",
-  "version": "0.0.23",
+  "version": "0.0.24",
   "scripts": {
     "publish-please": "publish-please",
-    "prepublish": "tsc && publish-please guard",
-    "typescript": "tsc"
+    "prepublishOnly": "rimraf dist/ && tsc -p ./tsconfig.build.json && publish-please guard",
+    "typescript": "tsc",
+    "test": "node_modules/cucumber/bin/cucumber-js src/*.feature",
+    "pretest": "tsc -p ./tsconfig.json",
+    "posttest": "rimraf src/**/*.js src/*.js src/**/*.d.ts src/*.d.ts"
   },
   "devDependencies": {
     "@types/node": "^10.9.4",
+    "chai": "^4.1.2",
+    "cucumber": "^4.2.1",
+    "cucumber-tsflow": "^2.2.0",
     "publish-please": "^3.2.0",
     "rimraf": "^2.6.2",
     "typescript": "^3.0.1"
@@ -21,8 +27,8 @@
     "url": "https://github.com/manwaring/serverless-plugin-iam-checker"
   },
   "homepage": "https://github.com/manwaring/serverless-plugin-iam-checker",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/iam-checker.js",
+  "types": "dist/iam-checker.d.ts",
   "author": "From Phillip with ♥",
   "license": "MIT",
   "keywords": [

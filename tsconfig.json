@@ -3,7 +3,7 @@
     "target": "es6",
     "module": "commonjs",
     "declaration": true,
-    "outDir": "dist"
+    "experimentalDecorators": true
   },
   "exclude": ["node_modules", "dist", "examples"]
 }

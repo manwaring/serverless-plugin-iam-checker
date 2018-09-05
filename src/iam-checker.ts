@@ -1,4 +1,4 @@
-import { Resources, Role } from './cloudformation';
+import { Resources, Role } from './lib/cloudformation';
 
 class IamChecker {
   serverless: any;

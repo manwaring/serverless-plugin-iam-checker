@@ -61,3 +61,6 @@ typings/
 .next
 
 dist/
+
+src/**/*.js
+src/**/*.d.ts
