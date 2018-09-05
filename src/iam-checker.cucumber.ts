@@ -1,7 +1,6 @@
 import { binding, when, then, given } from 'cucumber-tsflow';
 import { expect } from 'chai';
-import { template } from './mock-data/hello-world';
-import { getServerless } from './mock-data/serverless';
+import { getServerless, invalidHelloWorldTemplate, validHelloWorldTemplate } from './mock-data';
 import IamChecker = require('./iam-checker');
 
 @binding()
@@ -11,9 +10,14 @@ class iamCheckerTest {
   iamChecker: IamChecker;
   error: Error;
 
-  @given(/a CloudFormation template is generated with at least one star-only resource reference/)
-  public givenStarResourceTemplate() {
-    this.template = template;
+  @given(/a CloudFormation template with invalid permission configuration/)
+  public givenInvalidTemplate() {
+    this.template = invalidHelloWorldTemplate;
+  }
+
+  @given(/a CloudFormation template with valid permission configuration/)
+  public givenValidTemplate() {
+    this.template = validHelloWorldTemplate;
   }
 
   @given(/the IAM checking plugin is installed/)

@@ -1,4 +1,4 @@
-export const template = {
+export const validHelloWorldTemplate = {
   AWSTemplateFormatVersion: '2010-09-09',
   Description: 'The AWS CloudFormation template for this Serverless application',
   Resources: {
@@ -53,11 +53,6 @@ export const template = {
                         'arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/iam-checker-example-dev-hello:*:*'
                     }
                   ]
-                },
-                {
-                  Effect: 'Allow',
-                  Resource: '*',
-                  Action: '*'
                 }
               ]
             }
