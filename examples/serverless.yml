@@ -3,7 +3,7 @@ service:
 
 plugins:
   - serverless-webpack
-  # - serverless-plugin-iam-checker
+  - serverless-plugin-iam-checker
 
 provider:
   name: aws
