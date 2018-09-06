@@ -10,19 +10,15 @@ export class Checker {
   isRoleValid(role: Role): boolean {
     const { actions, resources } = role.getResourcesAndActions();
     const actionsAndResources = [...actions, ...resources];
-    console.log(`Properties to check: ${JSON.stringify(actionsAndResources)}`);
     let isValid = true;
     if (this.config.checkStarOnly) {
       isValid = isValid && this.hasNoStarOnlyProperties(actionsAndResources);
-      console.log(`Is valid after no star check: ${isValid}`);
     }
     if (this.config.allowedPatterns.length > 0) {
       isValid = isValid && this.propertyPatternsMatchAllowed(resources);
-      console.log(`Is valid after allowed patterns check: ${isValid}`);
     }
     if (this.config.allowedReferences.length > 0) {
       isValid = isValid && this.propertyReferencesMatchAllowed(resources);
-      console.log(`Is valid after allowed references check: ${isValid}`);
     }
     return isValid;
   }
