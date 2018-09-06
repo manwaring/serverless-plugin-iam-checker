@@ -1,6 +1,6 @@
 import { binding, when, then, given } from 'cucumber-tsflow';
 import { expect } from 'chai';
-import { getServerless, invalidHelloWorldTemplate, validHelloWorldTemplate } from './mock-data';
+import { getServerless, invalidHelloWorldTemplate, validHelloWorldTemplate, standardConfig } from './mock-data';
 import IamChecker = require('./iam-checker');
 
 @binding()
@@ -20,9 +20,15 @@ class iamCheckerTest {
     this.template = validHelloWorldTemplate;
   }
 
-  @given(/the IAM checking plugin is installed/)
-  public givenIamInstalled() {
+  @given(/the IAM checking plugin is installed with default config/)
+  public givenIamInstalledDefault() {
     this.serverless = getServerless(this.template);
+    this.iamChecker = new IamChecker(this.serverless);
+  }
+
+  @given(/the IAM checking plugin is installed with standard config/)
+  public givenIamInstalledCustom() {
+    this.serverless = getServerless(this.template, standardConfig);
     this.iamChecker = new IamChecker(this.serverless);
   }
 

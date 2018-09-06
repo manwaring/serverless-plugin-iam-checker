@@ -1,13 +1,13 @@
-import { Resources, Role } from './lib/cloudformation';
+import { Resources, Config } from './lib';
 
 class IamChecker {
   serverless: any;
-  config: any;
+  config: Config;
   hooks: any;
 
   constructor(serverless) {
     this.serverless = serverless;
-    this.config = (serverless.service.custom && serverless.service.custom.iamChecker) || {};
+    this.config = new Config((serverless.service.custom && serverless.service.custom.iamChecker) || undefined);
     this.hooks = {
       'after:package:createDeploymentArtifacts': this.checkIam.bind(this)
     };
@@ -16,7 +16,7 @@ class IamChecker {
   checkIam() {
     this.log('Checking IAM permissions...');
     const resources = new Resources(this.serverless.service.provider.compiledCloudFormationTemplate.Resources);
-    const invalidRoles = resources.getIamRoles().filter(role => role.isInvalid());
+    const invalidRoles = resources.getIamRoles().filter(role => role.isIamValid());
     if (invalidRoles && invalidRoles.length > 0) {
       const message = invalidRoles.reduce(
         (msg, role, index) => `${msg}${index > 0 ? ', ' : ''}${role.resourceName}`,

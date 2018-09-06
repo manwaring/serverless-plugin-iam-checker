@@ -31,7 +31,7 @@ export class Role implements Resource {
   Properties: RoleProperties;
   resourceName: string;
 
-  isInvalid(): boolean {
+  isIamValid(): boolean {
     const { actions, resources } = this.getStringifiedActionsAndResources();
     const starActions = this.getStarItems(actions);
     const starResources = this.getStarItems(resources);

@@ -1,10 +1,10 @@
-export function getServerless(compiledCloudFormationTemplate: any) {
+import { Config } from '../lib';
+
+export function getServerless(compiledCloudFormationTemplate: any, config?: Config) {
   return {
     service: {
       custom: {
-        iamChecker: {
-          test: 'test'
-        }
+        iamChecker: config
       },
       provider: {
         compiledCloudFormationTemplate
