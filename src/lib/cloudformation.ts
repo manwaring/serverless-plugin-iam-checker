@@ -31,14 +31,7 @@ export class Role implements Resource {
   Properties: RoleProperties;
   resourceName: string;
 
-  isInvalid(): boolean {
-    const { actions, resources } = this.getStringifiedActionsAndResources();
-    const starActions = this.getStarItems(actions);
-    const starResources = this.getStarItems(resources);
-    return (starActions && starActions.length > 0) || (starResources && starResources.length > 0);
-  }
-
-  getStringifiedActionsAndResources(): { actions: string[]; resources: string[] } {
+  getResourcesAndActions(): { actions: any; resources: any } {
     const policies = this.Properties.Policies;
     const statements = policies
       .map(policy => policy.PolicyDocument.Statement)
@@ -50,10 +43,6 @@ export class Role implements Resource {
       .map(statement => statement.getAllResources())
       .reduce((statementArr1, statementArr2) => [...statementArr1, ...statementArr2]);
     return { actions, resources };
-  }
-
-  getStarItems(items: string[]): string[] {
-    return items.filter(item => item.indexOf('*') > -1);
   }
 }
 
@@ -114,11 +103,11 @@ class Statement {
     return this.propsToArray(this.Resource);
   }
 
-  private propsToArray(props: any[] | any): string[] {
+  private propsToArray(props: any[] | any): any[] {
     if (Array.isArray(props)) {
-      return props.map(prop => JSON.stringify(prop));
+      return props;
     } else {
-      return [JSON.stringify(props)];
+      return [props];
     }
   }
 }
