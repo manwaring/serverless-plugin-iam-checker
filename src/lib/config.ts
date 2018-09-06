@@ -13,10 +13,7 @@ export class Config {
     } else {
       this.allowedPatterns = config.allowedPatterns;
       this.allowedReferences = config.allowedReferences;
-      this.checkStarOnly = config.checkStarOnly
-        ? config.checkStarOnly
-        : (!config.allowedPatterns || config.allowedPatterns.length < 1) &&
-          (!config.allowedReferences || config.allowedReferences.length < 1);
+      this.checkStarOnly = config.checkStarOnly;
     }
   }
   checkStarOnly?: boolean;
