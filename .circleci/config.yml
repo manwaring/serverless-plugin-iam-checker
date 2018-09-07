@@ -43,9 +43,9 @@ jobs:
       - run:
           name: Test
           command: npm test
-      - store_artifacts:
-          path: coverage
-          prefix: coverage
+      - run:
+          name: Send coverage to Codecov
+          command: npm run codecov
 
   publish:
     <<: *container-config
@@ -65,6 +65,7 @@ workflows:
     jobs:
       - install
       - test:
+          context: manwaring-codecov
           requires:
             - install
       - publish:
