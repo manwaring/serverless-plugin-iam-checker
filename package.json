@@ -6,7 +6,7 @@
     "publish-please": "publish-please",
     "prepublishOnly": "rimraf dist/ && npm run build && publish-please guard",
     "build": "tsc -p ./tsconfig.build.json",
-    "test": "node_modules/cucumber/bin/cucumber-js src/*.feature",
+    "test": "istanbul cover node_modules/cucumber/bin/cucumber-js src/*.feature",
     "pretest": "tsc -p ./tsconfig.json",
     "posttest": "rimraf src/**/*.js src/*.js src/**/**/*.js src/**/*.d.ts src/*.d.ts src/**/**/*.d.ts"
   },
@@ -15,6 +15,7 @@
     "chai": "^4.1.2",
     "cucumber": "^4.2.1",
     "cucumber-tsflow": "^2.2.0",
+    "istanbul": "^0.4.5",
     "publish-please": "^3.2.0",
     "rimraf": "^2.6.2",
     "typescript": "^3.0.1"
