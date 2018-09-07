@@ -1,14 +1,14 @@
 {
   "name": "serverless-plugin-iam-checker",
   "description": "A serverless plugin to check IAM policies for security compliance",
-  "version": "0.0.31",
+  "version": "0.0.32",
   "scripts": {
     "publish-please": "publish-please",
     "prepublishOnly": "rimraf dist/ && npm run build && publish-please guard",
     "build": "tsc -p ./tsconfig.build.json",
     "test": "nyc node_modules/cucumber/bin/cucumber-js src/*.feature",
     "pretest": "tsc -p ./tsconfig.json",
-    "posttest": "nyc report --reporter=json",
+    "posttest": "nyc report --reporter=json --reporter=lcov --reporter=cobertura",
     "cleanjs": "rimraf src/**/*.js* src/*.js* src/**/**/*.js* src/**/*.d.ts src/*.d.ts src/**/**/*.d.ts",
     "codecov": "codecov -f coverage/*.json"
   },
