@@ -34,6 +34,7 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - node_modules
+
   test:
     <<: *container-config
     steps:
