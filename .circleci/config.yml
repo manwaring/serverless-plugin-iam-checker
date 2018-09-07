@@ -45,8 +45,6 @@ jobs:
           command: npm test
       - store_artifacts:
           path: coverage
-      - store_test_results:
-          path: coverage
       - run:
           name: Send coverage to Codecov
           command: npm run codecov
