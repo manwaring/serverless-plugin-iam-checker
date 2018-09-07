@@ -6,7 +6,7 @@
     "publish-please": "publish-please",
     "prepublishOnly": "rimraf dist/ && npm run build && publish-please guard",
     "build": "tsc -p ./tsconfig.build.json",
-    "test": "nyc node_modules/cucumber/bin/cucumber-js src/*.feature",
+    "test": "nyc --exclude=src/mock-data/** --exclude=src/*.cucumber* node_modules/cucumber/bin/cucumber-js src/*.feature",
     "pretest": "tsc -p ./tsconfig.json",
     "posttest": "npm run reportcoverage && npm run cleanjs",
     "reportcoverage": "nyc report --reporter=json --reporter=lcov",
