@@ -43,6 +43,11 @@ jobs:
       - run:
           name: Test
           command: npm test
+      - store_artifacts:
+          path: coverage
+          prefix: coverage
+      - store_test_results:
+          path: coverage
       - run:
           name: Send coverage to Codecov
           command: npm run codecov
