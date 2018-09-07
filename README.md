@@ -4,6 +4,7 @@
 </p>
 
 [![Build status][build-badge]][build-badge-url]
+[![Test coverage][coverage-badge]][coverage-badge-url]
 [![Known Vulnerabilities][vulnerability-badge]][vulnerability-badge-url]
 [![Dependency Status][dependency-badge]][dependency-badge-url]
 [![devDependency Status][dev-dependency-badge]][dev-dependency-badge-url]
@@ -15,6 +16,8 @@
 
 [build-badge]: https://circleci.com/gh/manwaring/serverless-plugin-iam-checker.svg?style=shield&circle-token=1a965ecc2e543ea066f490fed6e2cca837d74f0d
 [build-badge-url]: https://circleci.com/gh/manwaring/serverless-plugin-iam-checker
+[coverage-badge]: https://codecov.io/gh/manwaring/serverless-plugin-iam-checker/branch/master/graph/badge.svg
+[coverage-badge-url]: https://codecov.io/gh/manwaring/serverless-plugin-iam-checker
 [dependency-badge]: https://david-dm.org/manwaring/serverless-plugin-iam-checker.svg
 [dependency-badge-url]: https://david-dm.org/manwaring/serverless-plugin-iam-checker
 [dev-dependency-badge]: https://david-dm.org/manwaring/serverless-plugin-iam-checker/dev-status.svg
