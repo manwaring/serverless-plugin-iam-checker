@@ -24,11 +24,11 @@ This [Serverless Framework](https://github.com/serverless/serverless) plugin che
 
 ## Installation
 
-Install and save to `package.json`
+Install and save to `package.json`:
 
 `npm i --save-dev serverless-plugin-iam-checker`
 
-Add to plugins list in `serverless.yml` plugins section
+Add to plugins list in `serverless.yml` plugins section:
 
 ```yml
 plugins:
