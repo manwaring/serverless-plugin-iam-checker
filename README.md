@@ -39,9 +39,13 @@ plugins:
 
 The available configuration options are:
 
-- Check star only:
-- Allowed patterns:
-- Allowed references:
+### Check star-only
+
+Flag to indicate if star-only resources and actions should be
+
+### Allowed patterns
+
+### Allowed references
 
 Default configuration:
 By default the only check the plugin makes is ensuring that there are no star-only actions or resources defined (e.g. `Resources: '\*' or Actions: '\*').
