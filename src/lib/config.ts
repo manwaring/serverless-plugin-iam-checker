@@ -1,10 +1,13 @@
 const defaultConfig: Config = {
   actions: {
-    allowStars: false
+    allowStars: false,
+    allowStarOnly: false
   },
   resources: {
     allowedPatterns: [],
-    allowedReferences: []
+    allowedReferences: [],
+    allowStars: true,
+    allowStarOnly: false
   }
 };
 
@@ -20,11 +23,14 @@ export class Config {
 
 class ActionConfig {
   allowStars: boolean;
+  allowStarOnly: boolean;
 }
 
 class ResourceConfig {
   allowedPatterns: [];
   allowedReferences: [];
+  allowStars: boolean;
+  allowStarOnly: boolean;
 }
 
 // TODO need to override with environment variables if exist
