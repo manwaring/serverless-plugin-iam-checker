@@ -11,6 +11,7 @@ export class Checker {
     const { actions, resources } = role.getResourcesAndActions();
     const actionsAndResources = [...actions, ...resources];
     let isValid = true;
+    // need to update - one method to check actions, another to check resources
     if (this.config.checkStarOnly) {
       isValid = isValid && this.hasNoStarOnlyProperties(actionsAndResources);
     }
