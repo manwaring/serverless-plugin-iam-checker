@@ -9,19 +9,21 @@ export class Checker {
 
   isRoleValid(role: Role): boolean {
     const { actions, resources } = role.getResourcesAndActions();
-    const actionsAndResources = [...actions, ...resources];
-    let isValid = true;
-    // need to update - one method to check actions, another to check resources
-    if (this.config.checkStarOnly) {
-      isValid = isValid && this.hasNoStarOnlyProperties(actionsAndResources);
-    }
-    if (this.config.allowedPatterns.length > 0) {
-      isValid = isValid && this.propertyPatternsMatchAllowed(resources);
-    }
-    if (this.config.allowedReferences.length > 0) {
-      isValid = isValid && this.propertyReferencesMatchAllowed(resources);
-    }
-    return isValid;
+    return this.areActionsValid(actions) && this.areResourcesValid(resources);
+  }
+
+  // TODO reference config and check if valid correctly
+  areActionsValid(actions: any[]): boolean {
+    return this.hasNoStarOnlyProperties(actions);
+  }
+
+  // TODO reference config and check if valid correctly
+  areResourcesValid(resources: any[]): boolean {
+    return (
+      this.hasNoStarOnlyProperties(resources) &&
+      this.propertyPatternsMatchAllowed(resources) &&
+      this.propertyReferencesMatchAllowed(resources)
+    );
   }
 
   hasNoStarOnlyProperties(properties: any[]): boolean {

@@ -1,5 +1,6 @@
 const defaultConfig: Config = {
   actions: {
+    allowedPatterns: [],
     allowStars: false,
     allowStarOnly: false
   },
@@ -22,13 +23,14 @@ export class Config {
 }
 
 class ActionConfig {
+  allowedPatterns: string[];
   allowStars: boolean;
   allowStarOnly: boolean;
 }
 
 class ResourceConfig {
-  allowedPatterns: [];
-  allowedReferences: [];
+  allowedPatterns: string[];
+  allowedReferences: string[];
   allowStars: boolean;
   allowStarOnly: boolean;
 }
