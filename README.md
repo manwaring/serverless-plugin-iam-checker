@@ -14,7 +14,7 @@
 
 # Serverless plugin IAM checker
 
-1. [Package overview](#plugin-overview)
+1. [Plugin overview](#plugin-overview)
 1. [Installation](#installation)
 1. [Setup and configuration](#setup-and-configuration)
 
