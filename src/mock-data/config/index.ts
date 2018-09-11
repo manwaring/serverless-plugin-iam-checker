@@ -14,6 +14,23 @@ export const basicConfig: Config = {
   }
 };
 
+export const partialConfigWithResources: Config = {
+  resources: {
+    allowedPatterns: ['arn:'],
+    allowedReferences: ['Fn::Sub', 'Ref', 'Fn::Join'],
+    allowWildcards: true,
+    allowWildcardOnly: false
+  }
+};
+
+export const partialConfigWithActions: Config = {
+  actions: {
+    allowedPatterns: [':'],
+    allowWildcards: false,
+    allowWildcardOnly: false
+  }
+};
+
 export const impossibleConfig: Config = {
   actions: {
     allowedPatterns: ['nothing will pass this'],

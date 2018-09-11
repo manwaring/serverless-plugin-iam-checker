@@ -5,6 +5,8 @@ import {
   invalidHelloWorldTemplate,
   validHelloWorldTemplate,
   basicConfig,
+  partialConfigWithActions,
+  partialConfigWithResources,
   impossibleConfig
 } from './mock-data';
 import IamChecker = require('./plugin');
@@ -35,6 +37,18 @@ class iamCheckerTest {
   @given(/the IAM checking plugin is installed with basic config/)
   public givenIamInstalledBasic() {
     this.serverless = getServerless(this.template, basicConfig);
+    this.iamChecker = new IamChecker(this.serverless);
+  }
+
+  @given(/the IAM checking plugin is installed with partial resources-only config/)
+  public givenIamInstalledPartialResources() {
+    this.serverless = getServerless(this.template, partialConfigWithResources);
+    this.iamChecker = new IamChecker(this.serverless);
+  }
+
+  @given(/the IAM checking plugin is installed with partial actions-only config/)
+  public givenIamInstalledPartialActions() {
+    this.serverless = getServerless(this.template, partialConfigWithActions);
     this.iamChecker = new IamChecker(this.serverless);
   }
 
