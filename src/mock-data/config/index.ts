@@ -40,7 +40,7 @@ export const impossibleConfig: Config = {
   resources: {
     allowedPatterns: ['nothing will pass this'],
     allowedReferences: ["even if it did it won't pass this"],
-    allowWildcards: true,
+    allowWildcards: false,
     allowWildcardOnly: false
   }
 };

@@ -1,15 +1,16 @@
 export class BasicChecker {
   propertyPatternsMatchAllowed(properties: any[], allowedPatterns: string[]): boolean {
-    return (
-      properties.filter(
-        property => this.isPropertyObject(property) && !this.doesPropertyPatternMatch(property, allowedPatterns)
-      ).length === 0
-    );
+    return properties.filter(property => !this.doesPropertyPatternMatch(property, allowedPatterns)).length === 0;
   }
 
   doesPropertyPatternMatch(property: any, allowedPatterns: string[]): boolean {
-    const key = Object.keys(property)[0];
-    const value = property[key];
+    let value;
+    if (this.isPropertyObject(property)) {
+      const key = Object.keys(property)[0];
+      value = property[key];
+    } else {
+      value = property;
+    }
     return this.propertyIsString(value) && allowedPatterns.find(pattern => value.indexOf(pattern) > -1) !== undefined;
   }
 
