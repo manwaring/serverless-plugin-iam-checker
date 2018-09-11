@@ -8,9 +8,9 @@
     "build": "tsc -p ./tsconfig.build.json",
     "test": "nyc --exclude=src/mock-data/** --exclude=src/*.cucumber* node_modules/cucumber/bin/cucumber-js src/*.feature",
     "pretest": "tsc -p ./tsconfig.json",
-    "posttest": "npm run reportcoverage && npm run cleanjs",
+    "posttest": "npm run reportcoverage && npm run clean",
     "reportcoverage": "nyc report --reporter=json --reporter=lcov",
-    "cleanjs": "rimraf src/**/*.js* src/*.js* src/**/**/*.js* src/**/*.d.ts src/*.d.ts src/**/**/*.d.ts",
+    "clean": "rimraf src/**/*.js* src/*.js* src/**/**/*.js* src/**/*.d.ts src/*.d.ts src/**/**/*.d.ts",
     "codecov": "codecov -f coverage/*.json"
   },
   "devDependencies": {

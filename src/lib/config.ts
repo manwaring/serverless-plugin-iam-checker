@@ -1,14 +1,14 @@
 const defaultConfig: Config = {
   actions: {
-    allowedPatterns: [],
-    allowStars: false,
-    allowStarOnly: false
+    allowedPatterns: [':'],
+    allowWildcards: false,
+    allowWildcardOnly: false
   },
   resources: {
-    allowedPatterns: [],
-    allowedReferences: [],
-    allowStars: true,
-    allowStarOnly: false
+    allowedReferences: ['Ref', 'Fn::Join', 'Fn::Sub'],
+    allowedPatterns: ['arn:'],
+    allowWildcards: true,
+    allowWildcardOnly: false
   }
 };
 
@@ -22,17 +22,17 @@ export class Config {
   resources?: ResourceConfig;
 }
 
-class ActionConfig {
+export class ActionConfig {
   allowedPatterns: string[];
-  allowStars: boolean;
-  allowStarOnly: boolean;
+  allowWildcards: boolean;
+  allowWildcardOnly: boolean;
 }
 
-class ResourceConfig {
+export class ResourceConfig {
   allowedPatterns: string[];
   allowedReferences: string[];
-  allowStars: boolean;
-  allowStarOnly: boolean;
+  allowWildcards: boolean;
+  allowWildcardOnly: boolean;
 }
 
 // TODO need to override with environment variables if exist
