@@ -42,7 +42,7 @@ class ActionsChecker extends BasicChecker {
     const validationMessages: string[] = [];
     if (!this.config.allowWildcardOnly && this.hasPropertiesWithWildcardOnly(this.actions)) {
       isValid = false;
-      validationMessages.push(`Wildcard only actions are not allowed`);
+      validationMessages.push(`Wildcard-only actions are not allowed`);
     }
     if (!this.config.allowWildcards && this.hasPropertiesWithWildcard(this.actions)) {
       isValid = false;
@@ -74,7 +74,7 @@ class ResourcesChecker extends BasicChecker {
     const validationMessages: string[] = [];
     if (!this.config.allowWildcardOnly && this.hasPropertiesWithWildcardOnly(this.resources)) {
       isValid = false;
-      validationMessages.push(`Wildcard only resources are not allowed`);
+      validationMessages.push(`Wildcard-only resources are not allowed`);
     }
     if (!this.config.allowWildcards && this.hasPropertiesWithWildcard(this.resources)) {
       isValid = false;

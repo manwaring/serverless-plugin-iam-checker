@@ -26,10 +26,9 @@ class IamCheckerPlugin {
         (msg, validation, index) => `${msg}${index > 0 ? ', ' : ''}${validation.role.resourceName}`,
         'The following roles have invalid configurations: '
       );
-      this.debug(
-        invalidRoles.reduce(
-          (msg, validation, index) => `${msg}${index > 0 ? '/n' : ''}${validation.validationMessages}`,
-          'The following errors occurred:/n'
+      invalidRoles.forEach(validation =>
+        this.debug(
+          `${validation.role.resourceName} has the following validation errors: ${validation.validationMessages}`
         )
       );
       throw new this.serverless.classes.Error(message);

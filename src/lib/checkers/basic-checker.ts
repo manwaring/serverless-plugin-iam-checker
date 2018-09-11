@@ -21,7 +21,7 @@ export class BasicChecker {
   }
 
   hasPropertiesWithWildcard(properties: any[]): boolean {
-    return properties.filter(property => this.propertyHasWildcard(property)).length === 0;
+    return properties.filter(property => this.propertyHasWildcard(property)).length > 0;
   }
 
   propertyHasWildcard(property: any): boolean {
