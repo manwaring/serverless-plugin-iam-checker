@@ -20,7 +20,7 @@
 
 ## Plugin overview
 
-This [Serverless Framework](https://github.com/serverless/serverless) plugin checks all IAM resources that are created in a given serverless project and validates their permission configurations for overly-permissive actions and/or resource references.
+This [Serverless Framework](https://github.com/serverless/serverless) plugin checks all IAM resources that are created in a given serverless project and validates their permission configurations for overly-permissive actions and/or resource references. If IAM resources are invalid per the configuration the `sls` command will fail after the `package` step.
 
 ## Installation
 
@@ -37,9 +37,9 @@ plugins:
 
 ## Setup and configuration
 
-Rules are configured separately for actions and resources because of the frequently dynamic nature of resource references (actions are rarely if ever dynamic). If the actions or resources configurations (or both) aren't found in environment variables or the `serverless.yml` custom config section then this plugin will default to the configurations specified in the tables below.
+Rules are configured separately for actions and resources because of the frequently dynamic nature of resource references, whereas actions are rarely if ever dynamic. If the actions or resources configurations (or both) aren't found in environment variables or the `serverless.yml` custom config section then this plugin will use to the default configurations specified in the tables below.
 
-If configuration values are found in both environment variables and `serverless.yml` the plugin will use the environment variable values - this is done to help ensure security compliance in build/test/deploy pipelines where developers generally don't have access to underlying environoment variables (as opposed to `serverless.yml`, which they typically have unlimited access to modify)
+If configuration values are found in both environment variables and `serverless.yml` the plugin will use the environment variable values - this is done to help ensure security compliance in build/test/deploy pipelines where developers generally don't have access to underlying environoment variables (as opposed to `serverless.yml`, which they typically have unlimited access to modify).
 
 ### Actions
 
