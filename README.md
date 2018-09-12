@@ -14,21 +14,21 @@
 
 # Serverless plugin IAM checker
 
-1. [Package overview](#plugin-overview)
+1. [Plugin overview](#plugin-overview)
 1. [Installation](#installation)
 1. [Setup and configuration](#setup-and-configuration)
 
 ## Plugin overview
 
-This [Serverless Framework](https://github.com/serverless/serverless) plugin checks all IAM resources that are created in a given serverless project and validates their permission configurations for overly-permissive actions and/or resource references.
+This [Serverless Framework](https://github.com/serverless/serverless) plugin checks all IAM resources that are created in a given serverless project and validates their permission configurations for overly-permissive actions and/or resource references. If IAM resources are invalid per the configuration the `sls` command will fail after the `package` step.
 
 ## Installation
 
-Install and save to `package.json`
+Install and save to `package.json`:
 
 `npm i --save-dev serverless-plugin-iam-checker`
 
-Add to plugins list in `serverless.yml` plugins section
+Add to plugins list in `serverless.yml` plugins section:
 
 ```yml
 plugins:
@@ -37,34 +37,62 @@ plugins:
 
 ## Setup and configuration
 
-The available configuration options are:
+Rules are configured separately for actions and resources because of the frequently dynamic nature of resource references, whereas actions are rarely if ever dynamic. If the actions or resources configurations (or both) aren't found in environment variables or the `serverless.yml` custom config section then this plugin will use to the default configurations specified in the tables below.
 
-- Check star only:
-- Allowed patterns:
-- Allowed references:
+If configuration values are found in both environment variables and `serverless.yml` the plugin will use the environment variable values - this is done to help ensure security compliance in build/test/deploy pipelines where developers generally don't have access to underlying environoment variables (as opposed to `serverless.yml`, which they typically have unlimited access to modify).
 
-Default configuration:
-By default the only check the plugin makes is ensuring that there are no star-only actions or resources defined (e.g. `Resources: '\*' or Actions: '\*').
+### Actions
 
-Optional `serverless.yml` configuration to override defaults:
+| Property            | Description                                              | Defaults | Example                                                                 |
+| ------------------- | -------------------------------------------------------- | -------- | ----------------------------------------------------------------------- |
+| Allow wildcards     | Flag to indicate if actions can include wildcards        | `false`  | config: `false` passes: `dynamodb:PutItem` fails: `dynamodb:*`          |
+| Allow wildcard only | Flag to indicate if actions can be only wildcards        | `false`  | config: `true` passes: `dynamodb:PutItem` fails: `*`                    |
+| Allowed patterns    | List of strings used to further restrict allowed actions | `[]`     | config: `['dynamodb:']` passes: `dynamodb:PutItem` fails `s3:PutObject` |
+
+### Resources
+
+| Property            | Description                                                                                                               | Defaults                         | Example                                                                                       |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------- | -------------------------------- | --------------------------------------------------------------------------------------------- |
+| Allow wildcards     | Flag to indicate if actions can include wildcards                                                                         | `true`                           | config: `false` passes: `dynamodb:PutItem` fails: `dynamodb:*`                                |
+| Allow wildcard only | Flag to indicate if actions can be only wildcards                                                                         | `false`                          | config: `true` passes: `dynamodb:PutItem` fails: `*`                                          |
+| Allowed patterns    | List of strings used to further restrict allowed resource names                                                           | `[arn:]`                         | config: `['arn:']` passes: `arn:whatever` fails `whatever`                                    |
+| Allowed references  | List of strings used to further restrict allowed resource keys (for compound objects, e.g. ones using dynamic references) | `['Ref', 'Fn::Join', 'Fn::Sub']` | config: `['Fn::Sub']` passes: `{ 'Fn::Sub': 'whatever' }` fails: `{ 'Ref': 'WhateverTable' }` |
+
+### Setting configurations via serverless.yml
 
 ```yml
 custom:
   iamChecker:
-    checkStarOnly: false
-    allowedPatterns:
-      - 'arn:'
-    allowedReferences:
-      - 'Ref'
-      - 'Fn::Join'
-      - 'Fn::Sub'
+    actions:
+      allowWildcards: false
+      allowWildcardOnly: false
+      allowedPatterns:
+        - 'dynamodb:'
+    resources:
+      allowWildcards: true
+      allowWildcardOnly: false
+      allowedPatterns:
+        - 'arn:'
+      allowedReferences:
+        - 'Ref'
+        - 'Fn::Join'
+        - 'Fn::Sub'
 ```
 
-Option environment variable configuration to override defaults:
+### Setting configurations via environment variables
 
-- `IAM_CHECKER_CHECK_STAR_ONLY`=false
-- `IAM_CHECKER_ALLOWED_PATTERNS`=['arn:']
-- `IAM_CHECK_ALLOWED_REFERENCES`=['Ref', 'Fn::Join', 'Fn::Sub']
+Actions
+
+- `IAM_CHECKER_ACTIONS_ALLOW_WILDCARDS`=false
+- `IAM_CHECKER_ACTIONS_ALLOW_WILDCARDONLY`=false
+- `IAM_CHECKER_ACTIONS_ALLOWED_PATTERNS`=['dynamodb:']
+
+  Resources
+
+- `IAM_CHECKER_RESOURCES_ALLOW_WILDCARDS`=true
+- `IAM_CHECKER_RESOURCES_ALLOW_WILDCARDONLY`=false
+- `IAM_CHECKER_RESOURCES_ALLOWED_PATTERNS`=['arn:']
+- `IAM_CHECKER_RESOURCES_ALLOWED_REFERENCES`=['Ref', 'Fn::Join', 'Fn::Sub']
 
 [build-badge]: https://circleci.com/gh/manwaring/serverless-plugin-iam-checker.svg?style=shield&circle-token=1a965ecc2e543ea066f490fed6e2cca837d74f0d
 [build-badge-url]: https://circleci.com/gh/manwaring/serverless-plugin-iam-checker
