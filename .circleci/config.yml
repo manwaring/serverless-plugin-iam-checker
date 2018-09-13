@@ -64,6 +64,8 @@ jobs:
   post-publish-test:
     <<: *container-config
     steps:
+      - checkout
+      - *load-cache
       - run:
           name: Package sample app
           command: npm run packagesampleapp
