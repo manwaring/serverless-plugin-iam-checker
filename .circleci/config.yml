@@ -48,6 +48,9 @@ jobs:
       - run:
           name: Send coverage to Codecov
           command: npm run codecov
+      - run:
+          name: Package sample app
+          command: npm run packagesampleapp
 
   publish:
     <<: *container-config

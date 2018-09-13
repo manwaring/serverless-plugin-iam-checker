@@ -1,7 +1,7 @@
 {
   "name": "serverless-plugin-iam-checker",
   "description": "A serverless plugin to check IAM policies for security compliance",
-  "version": "0.0.35",
+  "version": "0.0.36",
   "scripts": {
     "publish-please": "publish-please",
     "prepublishOnly": "rimraf dist/ && npm run build && publish-please guard",
@@ -11,7 +11,8 @@
     "posttest": "npm run reportcoverage && npm run clean",
     "reportcoverage": "nyc report --reporter=json --reporter=lcov",
     "clean": "rimraf src/**/*.js* src/*.js* src/**/**/*.js* src/**/*.d.ts src/*.d.ts src/**/**/*.d.ts",
-    "codecov": "codecov -f coverage/*.json"
+    "codecov": "codecov -f coverage/*.json",
+    "packagesampleapp": "cd examples && npm i && sls package"
   },
   "devDependencies": {
     "@types/node": "^10.9.4",
@@ -33,8 +34,8 @@
     "url": "https://github.com/manwaring/serverless-plugin-iam-checker"
   },
   "homepage": "https://github.com/manwaring/serverless-plugin-iam-checker",
-  "main": "dist/iam-checker.js",
-  "types": "dist/iam-checker.d.ts",
+  "main": "dist/plugin.js",
+  "types": "dist/plugin.d.ts",
   "author": "From Phillip with ♥",
   "license": "MIT",
   "keywords": [
