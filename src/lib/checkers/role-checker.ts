@@ -53,7 +53,9 @@ class ActionsChecker extends BasicChecker {
       !this.propertyPatternsMatchAllowed(this.actions, this.config.allowedPatterns)
     ) {
       isValid = false;
-      validationMessages.push(`Actions must match the following patterns: ${this.config.allowedPatterns}`);
+      validationMessages.push(
+        `Actions must match the following patterns: ${JSON.stringify(this.config.allowedPatterns)}`
+      );
     }
     return { isValid, validationMessages };
   }
@@ -85,14 +87,18 @@ class ResourcesChecker extends BasicChecker {
       !this.propertyPatternsMatchAllowed(this.resources, this.config.allowedPatterns)
     ) {
       isValid = false;
-      validationMessages.push(`Resources must match the following patterns: ${this.config.allowedPatterns}`);
+      validationMessages.push(
+        `Resources must match the following patterns: ${JSON.stringify(this.config.allowedPatterns)}`
+      );
     }
     if (
       this.config.allowedReferences.length > 0 &&
       !this.propertyReferencesMatchAllowed(this.resources, this.config.allowedReferences)
     ) {
       isValid = false;
-      validationMessages.push(`Resources must match the following references: ${this.config.allowedReferences}`);
+      validationMessages.push(
+        `Resources must match the following references: ${JSON.stringify(this.config.allowedReferences)}`
+      );
     }
     return { isValid, validationMessages };
   }

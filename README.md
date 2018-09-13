@@ -15,14 +15,15 @@
 # Serverless plugin IAM checker
 
 1. [Plugin overview](#plugin-overview)
-1. [Installation](#installation)
-1. [Setup and configuration](#setup-and-configuration)
+1. [Installation and setup](#installation)
+1. [Detailed validation logging](#detailed-validation-logging)
+1. [Rule configuration](#setup-and-configuration)
 
 ## Plugin overview
 
 This [Serverless Framework](https://github.com/serverless/serverless) plugin checks all IAM resources that are created in a given serverless project and validates their permission configurations for overly-permissive actions and/or resource references. If IAM resources are invalid per the configuration the `sls` command will fail after the `package` step.
 
-## Installation
+## Installation and setup
 
 Install and save to `package.json`:
 
@@ -35,11 +36,25 @@ plugins:
   - serverless-plugin-iam-checker
 ```
 
-## Setup and configuration
+## Rule configuration
 
-Rules are configured separately for actions and resources because of the frequently dynamic nature of resource references, whereas actions are rarely if ever dynamic. If the actions or resources configurations (or both) aren't found in environment variables or the `serverless.yml` custom config section then this plugin will use to the default configurations specified in the tables below.
+Rules are configured separately for actions and resources because of the frequently dynamic nature of resource references, whereas actions are rarely if ever dynamic. If any of the individual actions or resources rules aren't found in environment variables or the `serverless.yml` custom config section then this plugin will use the default rule configuration specified in the tables below.
 
-If configuration values are found in both environment variables and `serverless.yml` the plugin will use the environment variable values - this is done to help ensure security compliance in build/test/deploy pipelines where developers generally don't have access to underlying environoment variables (as opposed to `serverless.yml`, which they typically have unlimited access to modify).
+If rule values are found in both environment variables and `serverless.yml` the plugin will use the environment variable values - this is done to help ensure security compliance in build/test/deploy pipelines where developers generally don't have access to underlying environoment variables (as opposed to `serverless.yml`, which they typically have unlimited access to modify).
+
+## Detailed validation logging
+
+For detailed logs about which rules have caused resources to fail validation rerun your commands with `SLS_DEBUG=*`. Output will appear similar to this:
+
+```
+Checking IAM permissions...
+  IamRoleLambdaExecution has the following validation errors:
+    Wildcard-only actions are not allowed
+    Wildcards in actions are not allowed
+    Actions must match the following patterns: [":"]
+    Wildcard-only resources are not allowed
+    Resources must match the following patterns: ["arn:"]
+```
 
 ### Actions
 
