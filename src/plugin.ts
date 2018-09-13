@@ -2,13 +2,11 @@ import { Resources, Config, RoleChecker } from './lib';
 
 class IamCheckerPlugin {
   serverless: any;
-  config: Config;
   roleChecker: RoleChecker;
   hooks: any;
 
   constructor(serverless) {
     this.serverless = serverless;
-    this.config = new Config((serverless.service.custom && serverless.service.custom.iamChecker) || undefined);
     this.hooks = {
       'after:package:createDeploymentArtifacts': this.checkIam.bind(this)
     };
@@ -16,10 +14,13 @@ class IamCheckerPlugin {
 
   checkIam() {
     this.log('Checking IAM permissions...');
+    const config = new Config(
+      (this.serverless.service.custom && this.serverless.service.custom.iamChecker) || undefined
+    );
     const resources = new Resources(this.serverless.service.provider.compiledCloudFormationTemplate.Resources);
     const invalidRoles = resources
       .getIamRoles()
-      .map(role => new RoleChecker(this.config, role).validate())
+      .map(role => new RoleChecker(config, role).validate())
       .filter(validation => !validation.isValid);
     if (invalidRoles && invalidRoles.length > 0) {
       const message = invalidRoles.reduce(
