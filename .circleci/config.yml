@@ -68,7 +68,7 @@ jobs:
       - *load-cache
       - run:
           name: Package sample app
-          command: npm run packagesampleapp
+          command: cd examples && npm i && npm run package
 
 workflows:
   version: 2
