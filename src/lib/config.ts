@@ -31,19 +31,19 @@ export class ActionConfig {
     } = process.env;
     this.allowWildcards = IAM_CHECKER_ACTIONS_ALLOW_WILDCARDS
       ? JSON.parse(IAM_CHECKER_ACTIONS_ALLOW_WILDCARDS)
-      : config.allowWildcards
+      : config && config.allowWildcards
         ? config.allowWildcards
-        : defaultConfig.resources.allowWildcards;
+        : defaultConfig.actions.allowWildcards;
     this.allowWildcardOnly = IAM_CHECKER_ACTIONS_ALLOW_WILDCARDONLY
       ? JSON.parse(IAM_CHECKER_ACTIONS_ALLOW_WILDCARDONLY)
-      : config.allowWildcardOnly
+      : config && config.allowWildcardOnly
         ? config.allowWildcardOnly
-        : defaultConfig.resources.allowWildcardOnly;
+        : defaultConfig.actions.allowWildcardOnly;
     this.allowedPatterns = IAM_CHECKER_ACTIONS_ALLOWED_PATTERNS
       ? JSON.parse(IAM_CHECKER_ACTIONS_ALLOWED_PATTERNS)
-      : config.allowedPatterns
+      : config && config.allowedPatterns
         ? config.allowedPatterns
-        : defaultConfig.resources.allowedPatterns;
+        : defaultConfig.actions.allowedPatterns;
   }
   allowedPatterns: string[] = [];
   allowWildcards: boolean;
@@ -60,22 +60,22 @@ export class ResourceConfig {
     } = process.env;
     this.allowWildcards = IAM_CHECKER_RESOURCES_ALLOW_WILDCARDS
       ? JSON.parse(IAM_CHECKER_RESOURCES_ALLOW_WILDCARDS)
-      : config.allowWildcards
+      : config && config.allowWildcards
         ? config.allowWildcards
         : defaultConfig.resources.allowWildcards;
     this.allowWildcardOnly = IAM_CHECKER_RESOURCES_ALLOW_WILDCARDONLY
       ? JSON.parse(IAM_CHECKER_RESOURCES_ALLOW_WILDCARDONLY)
-      : config.allowWildcardOnly
+      : config && config.allowWildcardOnly
         ? config.allowWildcardOnly
         : defaultConfig.resources.allowWildcardOnly;
     this.allowedPatterns = IAM_CHECKER_RESOURCES_ALLOWED_PATTERNS
       ? JSON.parse(IAM_CHECKER_RESOURCES_ALLOWED_PATTERNS)
-      : config.allowedPatterns
+      : config && config.allowedPatterns
         ? config.allowedPatterns
         : defaultConfig.resources.allowedPatterns;
     this.allowedReferences = IAM_CHECKER_RESOURCES_ALLOWED_REFERENCES
       ? JSON.parse(IAM_CHECKER_RESOURCES_ALLOWED_REFERENCES)
-      : config.allowedReferences
+      : config && config.allowedReferences
         ? config.allowedReferences
         : defaultConfig.resources.allowedReferences;
   }
