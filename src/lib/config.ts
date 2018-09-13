@@ -1,3 +1,13 @@
+export class Config {
+  constructor(config?: Config) {
+    config = config || defaultConfig;
+    this.actions = new ActionConfig(config.actions);
+    this.resources = new ResourceConfig(config.resources);
+  }
+  actions?: ActionConfig;
+  resources?: ResourceConfig;
+}
+
 const defaultConfig: Config = {
   actions: {
     allowedPatterns: [':'],
@@ -12,39 +22,65 @@ const defaultConfig: Config = {
   }
 };
 
-export class Config {
-  constructor(config?: Config) {
-    config = getConfigValues(config);
-    this.actions = config.actions;
-    this.resources = config.resources;
-  }
-  actions?: ActionConfig;
-  resources?: ResourceConfig;
-}
-
 export class ActionConfig {
+  constructor(config: ActionConfig) {
+    const {
+      IAM_CHECKER_ACTIONS_ALLOW_WILDCARDS,
+      IAM_CHECKER_ACTIONS_ALLOW_WILDCARDONLY,
+      IAM_CHECKER_ACTIONS_ALLOWED_PATTERNS
+    } = process.env;
+    this.allowWildcards = IAM_CHECKER_ACTIONS_ALLOW_WILDCARDS
+      ? JSON.parse(IAM_CHECKER_ACTIONS_ALLOW_WILDCARDS)
+      : config.allowWildcards
+        ? config.allowWildcards
+        : defaultConfig.resources.allowWildcards;
+    this.allowWildcardOnly = IAM_CHECKER_ACTIONS_ALLOW_WILDCARDONLY
+      ? JSON.parse(IAM_CHECKER_ACTIONS_ALLOW_WILDCARDONLY)
+      : config.allowWildcardOnly
+        ? config.allowWildcardOnly
+        : defaultConfig.resources.allowWildcardOnly;
+    this.allowedPatterns = IAM_CHECKER_ACTIONS_ALLOWED_PATTERNS
+      ? JSON.parse(IAM_CHECKER_ACTIONS_ALLOWED_PATTERNS)
+      : config.allowedPatterns
+        ? config.allowedPatterns
+        : defaultConfig.resources.allowedPatterns;
+  }
   allowedPatterns: string[] = [];
   allowWildcards: boolean;
   allowWildcardOnly: boolean;
 }
 
 export class ResourceConfig {
+  constructor(config: ResourceConfig) {
+    const {
+      IAM_CHECKER_RESOURCES_ALLOW_WILDCARDS,
+      IAM_CHECKER_RESOURCES_ALLOW_WILDCARDONLY,
+      IAM_CHECKER_RESOURCES_ALLOWED_PATTERNS,
+      IAM_CHECKER_RESOURCES_ALLOWED_REFERENCES
+    } = process.env;
+    this.allowWildcards = IAM_CHECKER_RESOURCES_ALLOW_WILDCARDS
+      ? JSON.parse(IAM_CHECKER_RESOURCES_ALLOW_WILDCARDS)
+      : config.allowWildcards
+        ? config.allowWildcards
+        : defaultConfig.resources.allowWildcards;
+    this.allowWildcardOnly = IAM_CHECKER_RESOURCES_ALLOW_WILDCARDONLY
+      ? JSON.parse(IAM_CHECKER_RESOURCES_ALLOW_WILDCARDONLY)
+      : config.allowWildcardOnly
+        ? config.allowWildcardOnly
+        : defaultConfig.resources.allowWildcardOnly;
+    this.allowedPatterns = IAM_CHECKER_RESOURCES_ALLOWED_PATTERNS
+      ? JSON.parse(IAM_CHECKER_RESOURCES_ALLOWED_PATTERNS)
+      : config.allowedPatterns
+        ? config.allowedPatterns
+        : defaultConfig.resources.allowedPatterns;
+    this.allowedReferences = IAM_CHECKER_RESOURCES_ALLOWED_REFERENCES
+      ? JSON.parse(IAM_CHECKER_RESOURCES_ALLOWED_REFERENCES)
+      : config.allowedReferences
+        ? config.allowedReferences
+        : defaultConfig.resources.allowedReferences;
+  }
   allowedPatterns: string[] = [];
   allowedReferences: string[] = [];
   allowWildcards: boolean;
   allowWildcardOnly: boolean;
-}
-
-// TODO need to override with environment variables if exist
-function getConfigValues(config: Config): Config {
-  if (!config || Object.keys(config).length < 1) {
-    config = defaultConfig;
-  }
-  if (!config.actions || Object.keys(config.actions).length < 1) {
-    config.actions = defaultConfig.actions;
-  }
-  if (!config.resources || Object.keys(config.resources).length < 1) {
-    config.resources = defaultConfig.resources;
-  }
-  return config;
 }
