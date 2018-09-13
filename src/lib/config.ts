@@ -23,14 +23,14 @@ export class Config {
 }
 
 export class ActionConfig {
-  allowedPatterns: string[];
+  allowedPatterns: string[] = [];
   allowWildcards: boolean;
   allowWildcardOnly: boolean;
 }
 
 export class ResourceConfig {
-  allowedPatterns: string[];
-  allowedReferences: string[];
+  allowedPatterns: string[] = [];
+  allowedReferences: string[] = [];
   allowWildcards: boolean;
   allowWildcardOnly: boolean;
 }
