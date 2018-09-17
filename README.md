@@ -66,12 +66,12 @@ Checking IAM permissions...
 
 ### Resources
 
-| Property            | Description                                                                                                               | Defaults                         | Example                                                                                       |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------- | -------------------------------- | --------------------------------------------------------------------------------------------- |
-| Allow wildcards     | Flag to indicate if actions can include wildcards                                                                         | `true`                           | config: `false` passes: `arn:whatever` fails: `arn:*`                                         |
-| Allow wildcard only | Flag to indicate if actions can be only wildcards                                                                         | `false`                          | config: `true` passes: `arn:*` fails: `*`                                                     |
-| Allowed patterns    | List of strings used to further restrict allowed resource names                                                           | `[arn:]`                         | config: `['arn:']` passes: `arn:whatever` fails `whatever`                                    |
-| Allowed references  | List of strings used to further restrict allowed resource keys (for compound objects, e.g. ones using dynamic references) | `['Ref', 'Fn::Join', 'Fn::Sub']` | config: `['Fn::Sub']` passes: `{ 'Fn::Sub': 'whatever' }` fails: `{ 'Ref': 'WhateverTable' }` |
+| Property            | Description                                                                                                               | Defaults | Example                                                                                       |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------- |
+| Allow wildcards     | Flag to indicate if actions can include wildcards                                                                         | `true`   | config: `false` passes: `arn:whatever` fails: `arn:*`                                         |
+| Allow wildcard only | Flag to indicate if actions can be only wildcards                                                                         | `false`  | config: `true` passes: `arn:*` fails: `*`                                                     |
+| Allowed patterns    | List of strings used to further restrict allowed resource names                                                           | `[]`     | config: `['arn:']` passes: `arn:whatever` fails `whatever`                                    |
+| Allowed references  | List of strings used to further restrict allowed resource keys (for compound objects, e.g. ones using dynamic references) | `[]`     | config: `['Fn::Sub']` passes: `{ 'Fn::Sub': 'whatever' }` fails: `{ 'Ref': 'WhateverTable' }` |
 
 ### Setting configurations via serverless.yml
 
