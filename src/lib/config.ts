@@ -10,13 +10,13 @@ export class Config {
 
 const defaultConfig: Config = {
   actions: {
-    allowedPatterns: [':'],
+    allowedPatterns: [],
     allowWildcards: false,
     allowWildcardOnly: false
   },
   resources: {
-    allowedReferences: ['Ref', 'Fn::Join', 'Fn::Sub'],
-    allowedPatterns: ['arn:'],
+    allowedReferences: [],
+    allowedPatterns: [],
     allowWildcards: true,
     allowWildcardOnly: false
   }
