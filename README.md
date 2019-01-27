@@ -3,14 +3,9 @@
   <img height="150" src="https://user-images.githubusercontent.com/2955468/44874521-6cb2c980-ac69-11e8-936b-b02a3519c4ec.png">
 </p>
 
-[![Build status][build-badge]][build-badge-url]
-[![Test coverage][coverage-badge]][coverage-badge-url]
-[![Known Vulnerabilities][vulnerability-badge]][vulnerability-badge-url]
-[![Dependency Status][dependency-badge]][dependency-badge-url]
-[![devDependency Status][dev-dependency-badge]][dev-dependency-badge-url]
-[![NPM version][latest-version-badge]][latest-version-badge-url]
-[![License][license-badge]][license-badge-url]
-[![Code style][formatter-badge]][formatter-badge-url]
+[![NPM version][latest-version-badge]][latest-version-badge-url][![Total downloads][total-downloads-badge]][total-downloads-badge-url][![Test coverage][coverage-badge]][coverage-badge-url][![License][license-badge]][license-badge-url]
+
+[![Build status][build-badge]][build-badge-url][![Known Vulnerabilities][vulnerability-badge]][vulnerability-badge-url][![Dependency Status][dependency-badge]][dependency-badge-url][![devDependency Status][dev-dependency-badge]][dev-dependency-badge-url][![Code style][formatter-badge]][formatter-badge-url]
 
 # Serverless plugin IAM checker
 
@@ -125,3 +120,5 @@ Actions
 [vulnerability-badge-url]: https://snyk.io/test/github/manwaring/serverless-plugin-iam-checker?targetFile=package.json
 [latest-version-badge]: https://img.shields.io/npm/v/serverless-plugin-iam-checker/latest.svg
 [latest-version-badge-url]: https://npmjs.com/package/serverless-plugin-iam-checker
+[total-downloads-badge]: https://img.shields.io/npm/dt/serverless-plugin-iam-checker.svg
+[total-downloads-badge-url]: https://www.npmjs.com/package/serverless-plugin-iam-checker
