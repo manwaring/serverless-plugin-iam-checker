@@ -116,8 +116,8 @@ Actions
 [formatter-badge-url]: #badge
 [license-badge]: https://img.shields.io/npm/l/serverless-plugin-iam-checker.svg
 [license-badge-url]: https://www.npmjs.com/package/serverless-plugin-iam-checker
-[vulnerability-badge]: https://snyk.io/test/github/manwaring/serverless-plugin-iam-checker/badge.svg?targetFile=package.json
-[vulnerability-badge-url]: https://snyk.io/test/github/manwaring/serverless-plugin-iam-checker?targetFile=package.json
+[vulnerability-badge]: https://api.dependabot.com/badges/status?host=github&repo=manwaring/serverless-plugin-iam-checker
+[vulnerability-badge-url]: https://dependabot.com/
 [latest-version-badge]: https://img.shields.io/npm/v/serverless-plugin-iam-checker/latest.svg
 [latest-version-badge-url]: https://npmjs.com/package/serverless-plugin-iam-checker
 [total-downloads-badge]: https://img.shields.io/npm/dt/serverless-plugin-iam-checker.svg
