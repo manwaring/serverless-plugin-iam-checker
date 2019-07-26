@@ -7,7 +7,7 @@
     "package": "sls package"
   },
   "dependencies": {
-    "serverless-plugin-iam-checker": "0.0.46"
+    "serverless-plugin-iam-checker": "*"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.28",
