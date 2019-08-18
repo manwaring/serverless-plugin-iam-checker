@@ -1,3 +1,14 @@
+all: true
+cache: false
+
+exclude:
+  - '**/*.js'
+  - '**/*/mock-data'
+  - '**/*cucumber.ts'
+  - '**/*index.ts'
+  - dist
+  - coverage
+  - examples
+
 extension:
   - .ts
-  - .js

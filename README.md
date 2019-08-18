@@ -3,55 +3,64 @@
   <img height="150" src="https://user-images.githubusercontent.com/2955468/44874521-6cb2c980-ac69-11e8-936b-b02a3519c4ec.png">
 </p>
 
-[![NPM version][latest-version-badge]][latest-version-badge-url][![Total downloads][total-downloads-badge]][total-downloads-badge-url][![Test coverage][coverage-badge]][coverage-badge-url][![License][license-badge]][license-badge-url]
+[![version]][version-url] [![downloads]][downloads-url] [![coverage]][coverage-url] [![size][size]][size-url] [![license]][license-url]
 
-[![Build status][build-badge]][build-badge-url][![Known Vulnerabilities][vulnerability-badge]][vulnerability-badge-url][![Dependency Status][dependency-badge]][dependency-badge-url][![devDependency Status][dev-dependency-badge]][dev-dependency-badge-url][![Code style][formatter-badge]][formatter-badge-url]
+[![build]][build-url] [![dependabot]][dependabot-url] [![dependency]][dependency-url] [![dev-dependency]][dev-dependency-url]
 
 # Serverless plugin IAM checker
 
-1. [Plugin overview](#plugin-overview)
-1. [Installation and setup](#installation)
+1. [Overview](#overview)
+1. [Installation and setup](#installation-and-setup)
+1. [Rule configuration](#rule-configuration)
+   1. [Default rule configuration](#default-rule-configuration)
+   1. [Action rules](#action-rules)
+   1. [Resource rules](#resource-rules)
+   1. [Setting rules via serverless.yml](#setting-rules-via-serverless.yml)
+   1. [Setting rules via environment variables](#setting-rules-via-environment-variables)
 1. [Detailed validation logging](#detailed-validation-logging)
-1. [Rule configuration](#setup-and-configuration)
+1. [Examples](#examples)
 
-## Plugin overview
+# Overview
 
-This [Serverless Framework](https://github.com/serverless/serverless) plugin checks all IAM resources that are created in a given serverless project and validates their permission configurations for overly-permissive actions and/or resource references. If IAM resources are invalid per the configuration the `sls` command will fail after the `package` step.
+This [Serverless Framework](https://github.com/serverless/serverless) plugin checks all generated IAM resources in a serverless project and validates their permission configurations for overly-permissive actions and/or resource references. If IAM resources are invalid per the configured rules then the `sls` command will fail after the `package` step, preventing the generated CloudFormation Stack from being deployed to AWS.
 
-## Installation and setup
+# Installation and setup
 
-Install and save to `package.json`:
+Install and save the package to `package.json` as a dev dependency:
 
 `npm i --save-dev serverless-plugin-iam-checker`
 
-Add to plugins list in `serverless.yml` plugins section:
+Add the package to the `serverless.yml` plugins section:
 
 ```yml
 plugins:
   - serverless-plugin-iam-checker
 ```
 
-## Rule configuration
+By default the plugin uses a [restrictive set of rules for action and resource configuration](#default-rule-configuration). These rules can be modified using either [serverless.yml custom configuration](#setting-rules-via-serverless.yml) or [environment variables](#setting-rules-via-environment-variables).
 
-Rules are configured separately for actions and resources because of the frequently dynamic nature of resource references, whereas actions are rarely if ever dynamic. If any of the individual actions or resources rules aren't found in environment variables or the `serverless.yml` custom config section then this plugin will use the default rule configuration specified in the tables below.
+# Rule configuration
+
+Rules are configured separately for actions and resources due to resources generally having a greater need for dynamic references, while actions can almost always be constrained explicitly. If any of the action or resource rules aren't found in environment variables or the `serverless.yml` custom config section then this plugin will use the default configurations specified in the tables below.
 
 If rule values are found in both environment variables and `serverless.yml` the plugin will use the environment variable values - this is done to help ensure security compliance in build/test/deploy pipelines where developers generally don't have access to underlying environoment variables (as opposed to `serverless.yml`, which they typically have unlimited access to modify).
 
-## Detailed validation logging
+## Default rule configuration
 
-For detailed logs about which rules have caused resources to fail validation rerun your commands with `SLS_DEBUG=*`. Output will appear similar to this:
+```yml
+actions:
+  allowWildcards: false
+  allowWildcardOnly: false
+  allowedPatterns: []
 
+resources:
+  allowWildcards: true
+  allowWildcardOnly: false
+  allowedPatterns: []
+  allowedReferences: []
 ```
-Checking IAM permissions...
-  IamRoleLambdaExecution has the following validation errors:
-    Wildcard-only actions are not allowed
-    Wildcards in actions are not allowed
-    Actions must match the following patterns: [":"]
-    Wildcard-only resources are not allowed
-    Resources must match the following patterns: ["arn:"]
-```
 
-### Actions
+## Action rules
 
 | Property            | Description                                              | Defaults | Example                                                                 |
 | ------------------- | -------------------------------------------------------- | -------- | ----------------------------------------------------------------------- |
@@ -59,7 +68,7 @@ Checking IAM permissions...
 | Allow wildcard only | Flag to indicate if actions can be only wildcards        | `false`  | config: `true` passes: `dynamodb:PutItem` fails: `*`                    |
 | Allowed patterns    | List of strings used to further restrict allowed actions | `[]`     | config: `['dynamodb:']` passes: `dynamodb:PutItem` fails `s3:PutObject` |
 
-### Resources
+## Resource rules
 
 | Property            | Description                                                                                                               | Defaults | Example                                                                                       |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------- |
@@ -68,11 +77,11 @@ Checking IAM permissions...
 | Allowed patterns    | List of strings used to further restrict allowed resource names                                                           | `[]`     | config: `['arn:']` passes: `arn:whatever` fails `whatever`                                    |
 | Allowed references  | List of strings used to further restrict allowed resource keys (for compound objects, e.g. ones using dynamic references) | `[]`     | config: `['Fn::Sub']` passes: `{ 'Fn::Sub': 'whatever' }` fails: `{ 'Ref': 'WhateverTable' }` |
 
-### Setting configurations via serverless.yml
+## Setting rules via serverless.yml
 
 ```yml
 custom:
-  iamChecker:
+  iamChecker: # This key is used by the plugin to pull in the optional rule configuration
     actions:
       allowWildcards: false
       allowWildcardOnly: false
@@ -89,36 +98,64 @@ custom:
         - 'Fn::Sub'
 ```
 
-### Setting configurations via environment variables
+## Setting rules via environment variables
 
-Actions
+```bash
+# Actions
+IAM_CHECKER_ACTIONS_ALLOW_WILDCARDS=false
+IAM_CHECKER_ACTIONS_ALLOW_WILDCARDONLY=false
+IAM_CHECKER_ACTIONS_ALLOWED_PATTERNS=['dynamodb:']
 
-- `IAM_CHECKER_ACTIONS_ALLOW_WILDCARDS`=false
-- `IAM_CHECKER_ACTIONS_ALLOW_WILDCARDONLY`=false
-- `IAM_CHECKER_ACTIONS_ALLOWED_PATTERNS`=['dynamodb:']
+# Resources
+IAM_CHECKER_RESOURCES_ALLOW_WILDCARDS=true
+IAM_CHECKER_RESOURCES_ALLOW_WILDCARDONLY=false
+IAM_CHECKER_RESOURCES_ALLOWED_PATTERNS=['arn:']
+IAM_CHECKER_RESOURCES_ALLOWED_REFERENCES=['Ref', 'Fn::Join', 'Fn::Sub']
+```
 
-  Resources
+# Detailed validation logging
 
-- `IAM_CHECKER_RESOURCES_ALLOW_WILDCARDS`=true
-- `IAM_CHECKER_RESOURCES_ALLOW_WILDCARDONLY`=false
-- `IAM_CHECKER_RESOURCES_ALLOWED_PATTERNS`=['arn:']
-- `IAM_CHECKER_RESOURCES_ALLOWED_REFERENCES`=['Ref', 'Fn::Join', 'Fn::Sub']
+For detailed logs about which rules have caused resources to fail validation rerun your commands with `SLS_DEBUG=*`. Output similar to this will be logged:
 
-[build-badge]: https://circleci.com/gh/manwaring/serverless-plugin-iam-checker.svg?style=shield&circle-token=1a965ecc2e543ea066f490fed6e2cca837d74f0d
-[build-badge-url]: https://circleci.com/gh/manwaring/serverless-plugin-iam-checker
-[coverage-badge]: https://codecov.io/gh/manwaring/serverless-plugin-iam-checker/branch/master/graph/badge.svg
-[coverage-badge-url]: https://codecov.io/gh/manwaring/serverless-plugin-iam-checker
-[dependency-badge]: https://david-dm.org/manwaring/serverless-plugin-iam-checker.svg
-[dependency-badge-url]: https://david-dm.org/manwaring/serverless-plugin-iam-checker
-[dev-dependency-badge]: https://david-dm.org/manwaring/serverless-plugin-iam-checker/dev-status.svg
-[dev-dependency-badge-url]: https://david-dm.org/manwaring/serverless-plugin-iam-checker?type=dev
-[formatter-badge]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square
-[formatter-badge-url]: #badge
-[license-badge]: https://img.shields.io/npm/l/serverless-plugin-iam-checker.svg
-[license-badge-url]: https://www.npmjs.com/package/serverless-plugin-iam-checker
-[vulnerability-badge]: https://api.dependabot.com/badges/status?host=github&repo=manwaring/serverless-plugin-iam-checker
-[vulnerability-badge-url]: https://dependabot.com/
-[latest-version-badge]: https://img.shields.io/npm/v/serverless-plugin-iam-checker/latest.svg
-[latest-version-badge-url]: https://npmjs.com/package/serverless-plugin-iam-checker
-[total-downloads-badge]: https://img.shields.io/npm/dt/serverless-plugin-iam-checker.svg
-[total-downloads-badge-url]: https://www.npmjs.com/package/serverless-plugin-iam-checker
+```
+Serverless: Packaging service...
+Serverless: Checking IAM permissions...
+  IamRoleLambdaExecution has the following validation errors:
+    Wildcard-only actions are not allowed
+    Wildcards in actions are not allowed
+    Actions must match the following patterns: [":"]
+    Wildcard-only resources are not allowed
+    Resources must match the following patterns: ["arn:"]
+```
+
+# Examples
+
+There is [one working example](examples) of how this package can be used in a simple 'hello world' serverless application:
+
+1. [Plugin with default configuration](examples/default)
+
+<!-- Badge icons -->
+
+[version]: https://flat.badgen.net/npm/v/serverless-plugin-iam-checker?icon=npm&label=npm@latest
+[downloads]: https://flat.badgen.net/npm/dt/serverless-plugin-iam-checker?icon=npm
+[coverage]: https://flat.badgen.net/codecov/c/github/manwaring/serverless-plugin-iam-checker/?icon=codecov
+[size]: https://flat.badgen.net/packagephobia/install/serverless-plugin-iam-checker
+[license]: https://flat.badgen.net/npm/license/serverless-plugin-iam-checker/
+[language]: https://flat.badgen.net/badge/typescript/typescript/?icon&label
+[style]: https://flat.badgen.net/badge/code%20style/prettier?color=purple&icon=terminal&label
+[build]: https://flat.badgen.net/circleci/github/manwaring/serverless-plugin-iam-checker/master?icon=circleci
+[dependabot]: https://flat.badgen.net/dependabot/manwaring/serverless-plugin-iam-checker/?icon=dependabot&label=dependabot
+[dependency]: https://flat.badgen.net/david/dep/manwaring/serverless-plugin-iam-checker
+[dev-dependency]: https://flat.badgen.net/david/dev/manwaring/serverless-plugin-iam-checker/?label=dev+dependencies
+
+<!-- Badge URLs -->
+
+[version-url]: https://npmjs.com/package/serverless-plugin-iam-checker
+[downloads-url]: https://www.npmjs.com/package/serverless-plugin-iam-checker
+[coverage-url]: https://codecov.io/gh/manwaring/serverless-plugin-iam-checker
+[size-url]: https://packagephobia.now.sh/result?p=serverless-plugin-iam-checker
+[license-url]: https://www.npmjs.com/package/serverless-plugin-iam-checker
+[build-url]: https://circleci.com/gh/manwaring/serverless-plugin-iam-checker
+[dependabot-url]: https://flat.badgen.net/dependabot/manwaring/serverless-plugin-iam-checker
+[dependency-url]: https://david-dm.org/manwaring/serverless-plugin-iam-checker
+[dev-dependency-url]: https://david-dm.org/manwaring/serverless-plugin-iam-checker?type=dev

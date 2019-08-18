@@ -1,0 +1,21 @@
+{
+  "name": "default-checker",
+  "version": "1.0.0",
+  "description": "Hello world default serverless-plugin-iam-checker example",
+  "scripts": {
+    "package": "sls package"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.31",
+    "@types/node": "^12.7.2",
+    "serverless": "^1.50.0",
+    "serverless-plugin-iam-checker": "*",
+    "serverless-webpack": "^5.3.1",
+    "source-map-support": "^0.5.13",
+    "ts-loader": "^6.0.4",
+    "typescript": "^3.5.3",
+    "webpack": "^4.39.2"
+  },
+  "author": "From Phillip with ♥",
+  "license": "MIT"
+}
