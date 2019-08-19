@@ -67,7 +67,7 @@ resources:
 | Property            | Description                                                                                      | Example                                                                                      |
 | ------------------- | ------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------- |
 | Allow wildcards     | **Type**: boolean<br/>**Effect**: can actions include wildcards<br/>**Default**: `false`         | **Config**: `false`<br/>**Passes**: `dynamodb:PutItem`<br/>**Fails**: `dynamodb:*`           |
-| Allow wildcard only | **Type**: boolean<br/>**Effect**: can actions be only wildcards<br/>**Default**: `false`         | **Config**: `true`<br/>**Passes**: `*`<br/>**Fails**: `dynamodb:PutItem`                     |
+| Allow wildcard only | **Type**: boolean<br/>**Effect**: can actions be only wildcards<br/>**Default**: `false`         | **Config**: `true`<br/>**Passes**: `*`<br/>**Fails**: `dynamodb:*`                           |
 | Allowed patterns    | **Type**: string array<br/>**Effect**: actions must match a listed pattern<br/>**Default**: `[]` | **Config**: `['dynamodb:']`<br/>**Passes**: `dynamodb:PutItem`<br/>**Fails**: `s3:PutObject` |
 
 ## Resource rules
