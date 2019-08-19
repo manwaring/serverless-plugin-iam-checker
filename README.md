@@ -67,7 +67,7 @@ resources:
 | Property            | Description                                                                                      | Example                                                                                      |
 | ------------------- | ------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------- |
 | Allow wildcards     | **Type**: boolean<br/>**Effect**: can actions include wildcards<br/>**Default**: `false`         | **Config**: `false`<br/>**Passes**: `dynamodb:PutItem`<br/>**Fails**: `dynamodb:*`           |
-| Allow wildcard only | **Type**: boolean<br/>**Effect**: can actions be only wildcards<br/>**Default**: `false`         | **Config**: `true`<br/>**Passes**: `dynamodb:*`<br/>**Fails**: `*`                           |
+| Allow wildcard only | **Type**: boolean<br/>**Effect**: can actions be only wildcards<br/>**Default**: `false`         | **Config**: `true`<br/>**Passes**: `*`<br/>**Fails**: `dynamodb:PutItem`                     |
 | Allowed patterns    | **Type**: string array<br/>**Effect**: actions must match a listed pattern<br/>**Default**: `[]` | **Config**: `['dynamodb:']`<br/>**Passes**: `dynamodb:PutItem`<br/>**Fails**: `s3:PutObject` |
 
 ## Resource rules
@@ -75,7 +75,7 @@ resources:
 | Property            | Description                                                                                                  | Example                                                                                                  |
 | ------------------- | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------- |
 | Allow wildcards     | **Type**: boolean<br/>**Effect**: can resources include wildcards<br/>**Default**: `true`                    | **Config**: `false`<br/>**Passes**: `arn:whatever`<br/>**Fails**: `arn:*`                                |
-| Allow wildcard only | **Type**: boolean<br/>**Effect**: can resources be only wildcards<br/>**Default**: `false`                   | **Config**: `true`<br/>**Passes**: `arn:*`<br/>**Fails**: `*`                                            |
+| Allow wildcard only | **Type**: boolean<br/>**Effect**: can resources be only wildcards<br/>**Default**: `false`                   | **Config**: `true`<br/>**Passes**: `*`<br/>**Fails**: `arn:*`                                            |
 | Allowed patterns    | **Type**: string array<br/>**Effect**: resources must match a listed pattern<br/>**Default**: `[]`           | **Config**: `['arn:']`<br/>**Passes**: `arn:whatever`<br/>**Fails**: `whatever`                          |
 | Allowed references  | **Type**: string array<br/>**Effect**: resource references must match a listed pattern<br/>**Default**: `[]` | **Config**: `['Ref']`<br/>**Passes**: `{ 'Ref': 'whatever' }`<br/>**Fails**: `{ 'Fn::Sub': 'whatever' }` |
 
