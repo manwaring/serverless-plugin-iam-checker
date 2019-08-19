@@ -66,18 +66,18 @@ resources:
 
 | Property            | Description                                                        | Defaults | Example                                                                          |
 | ------------------- | ------------------------------------------------------------------ | -------- | -------------------------------------------------------------------------------- |
-| Allow wildcards     | Type: boolean<br/>Effect: can actions include wildcards (\*)       | `false`  | config: `false`<br/>passes: `dynamodb:PutItem`<br/>fails: `dynamodb:*`           |
-| Allow wildcard only | Type: boolean<br/>Effect: can actions be only wildcards (\*)       | `false`  | config: `true`<br/>passes: `dynamodb:*`<br/>fails: `*`                           |
-| Allowed patterns    | Type: string array<br/>Effect: actions must match a listed pattern | `[]`     | config: `['dynamodb:']`<br/>passes: `dynamodb:PutItem`<br/>fails: `s3:PutObject` |
+| Allow wildcards     | Type: boolean<br/>Effect: can actions include wildcards (\*)       | `false`  | Config: `false`<br/>Passes: `dynamodb:PutItem`<br/>Fails: `dynamodb:*`           |
+| Allow wildcard only | Type: boolean<br/>Effect: can actions be only wildcards (\*)       | `false`  | Config: `true`<br/>Passes: `dynamodb:*`<br/>Fails: `*`                           |
+| Allowed patterns    | Type: string array<br/>Effect: actions must match a listed pattern | `[]`     | Config: `['dynamodb:']`<br/>Passes: `dynamodb:PutItem`<br/>Fails: `s3:PutObject` |
 
 ## Resource rules
 
 | Property            | Description                                                                    | Defaults | Example                                                                                      |
 | ------------------- | ------------------------------------------------------------------------------ | -------- | -------------------------------------------------------------------------------------------- |
-| Allow wildcards     | Type: boolean<br/>Effect: can resources include wildcards (\*)                 | `true`   | config: `false`<br/>passes: `arn:whatever`<br/>fails: `arn:*`                                |
-| Allow wildcard only | Type: boolean<br/>Effect: can resources be only wildcards (\*)                 | `false`  | config: `true`<br/>passes: `arn:*`<br/>fails: `*`                                            |
-| Allowed patterns    | Type: string array<br/>Effect: resources must match a listed pattern           | `[]`     | config: `['arn:']`<br/>passes: `arn:whatever`<br/>fails: `whatever`                          |
-| Allowed references  | Type: string array<br/>Effect: resource references must match a listed pattern | `[]`     | config: `['Ref']`<br/>passes: `{ 'Ref': 'whatever' }`<br/>fails: `{ 'Fn::Sub': 'whatever' }` |
+| Allow wildcards     | Type: boolean<br/>Effect: can resources include wildcards (\*)                 | `true`   | Config: `false`<br/>Passes: `arn:whatever`<br/>Fails: `arn:*`                                |
+| Allow wildcard only | Type: boolean<br/>Effect: can resources be only wildcards (\*)                 | `false`  | Config: `true`<br/>Passes: `arn:*`<br/>Fails: `*`                                            |
+| Allowed patterns    | Type: string array<br/>Effect: resources must match a listed pattern           | `[]`     | Config: `['arn:']`<br/>Passes: `arn:whatever`<br/>Fails: `whatever`                          |
+| Allowed references  | Type: string array<br/>Effect: resource references must match a listed pattern | `[]`     | Config: `['Ref']`<br/>Passes: `{ 'Ref': 'whatever' }`<br/>Fails: `{ 'Fn::Sub': 'whatever' }` |
 
 ## Setting rules via serverless.yml
 
