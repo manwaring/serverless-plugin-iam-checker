@@ -64,20 +64,20 @@ resources:
 
 ## Action rules
 
-| Property            | Description                                                        | Defaults | Example                                                                          |
-| ------------------- | ------------------------------------------------------------------ | -------- | -------------------------------------------------------------------------------- |
-| Allow wildcards     | Type: boolean<br/>Effect: can actions include wildcards (\*)       | `false`  | Config: `false`<br/>Passes: `dynamodb:PutItem`<br/>Fails: `dynamodb:*`           |
-| Allow wildcard only | Type: boolean<br/>Effect: can actions be only wildcards (\*)       | `false`  | Config: `true`<br/>Passes: `dynamodb:*`<br/>Fails: `*`                           |
-| Allowed patterns    | Type: string array<br/>Effect: actions must match a listed pattern | `[]`     | Config: `['dynamodb:']`<br/>Passes: `dynamodb:PutItem`<br/>Fails: `s3:PutObject` |
+| Property            | Description                                                                          | Example                                                                          |
+| ------------------- | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------- |
+| Allow wildcards     | Type: boolean<br/>Effect: can actions include wildcards (\*)<br/>Default: `false`    | Config: `false`<br/>Passes: `dynamodb:PutItem`<br/>Fails: `dynamodb:*`           |
+| Allow wildcard only | Type: boolean<br/>Effect: can actions be only wildcards (\*)<br/>Default: `false`    | Config: `true`<br/>Passes: `dynamodb:*`<br/>Fails: `*`                           |
+| Allowed patterns    | Type: string array<br/>Effect: actions must match a listed pattern<br/>Default: `[]` | Config: `['dynamodb:']`<br/>Passes: `dynamodb:PutItem`<br/>Fails: `s3:PutObject` |
 
 ## Resource rules
 
-| Property            | Description                                                                    | Defaults | Example                                                                                      |
-| ------------------- | ------------------------------------------------------------------------------ | -------- | -------------------------------------------------------------------------------------------- |
-| Allow wildcards     | Type: boolean<br/>Effect: can resources include wildcards (\*)                 | `true`   | Config: `false`<br/>Passes: `arn:whatever`<br/>Fails: `arn:*`                                |
-| Allow wildcard only | Type: boolean<br/>Effect: can resources be only wildcards (\*)                 | `false`  | Config: `true`<br/>Passes: `arn:*`<br/>Fails: `*`                                            |
-| Allowed patterns    | Type: string array<br/>Effect: resources must match a listed pattern           | `[]`     | Config: `['arn:']`<br/>Passes: `arn:whatever`<br/>Fails: `whatever`                          |
-| Allowed references  | Type: string array<br/>Effect: resource references must match a listed pattern | `[]`     | Config: `['Ref']`<br/>Passes: `{ 'Ref': 'whatever' }`<br/>Fails: `{ 'Fn::Sub': 'whatever' }` |
+| Property            | Description                                                                                      | Example                                                                                      |
+| ------------------- | ------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------- |
+| Allow wildcards     | Type: boolean<br/>Effect: can resources include wildcards (\*)<br/>Default: `true`               | Config: `false`<br/>Passes: `arn:whatever`<br/>Fails: `arn:*`                                |
+| Allow wildcard only | Type: boolean<br/>Effect: can resources be only wildcards (\*)<br/>Default: `false`              | Config: `true`<br/>Passes: `arn:*`<br/>Fails: `*`                                            |
+| Allowed patterns    | Type: string array<br/>Effect: resources must match a listed pattern<br/>Default: `[]`           | Config: `['arn:']`<br/>Passes: `arn:whatever`<br/>Fails: `whatever`                          |
+| Allowed references  | Type: string array<br/>Effect: resource references must match a listed pattern<br/>Default: `[]` | Config: `['Ref']`<br/>Passes: `{ 'Ref': 'whatever' }`<br/>Fails: `{ 'Fn::Sub': 'whatever' }` |
 
 ## Setting rules via serverless.yml
 
