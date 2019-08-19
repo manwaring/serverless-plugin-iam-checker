@@ -15,4 +15,4 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/), 
 - Clarify project intent and clean up documentation in README
 - Publish now happens from git tags instead of master merges
 
-[1.0.0]: https://github.com/manwaring/serverless-plugin-test-helper/compare/v0.0.47...v1.0.0
+[1.0.0]: https://github.com/manwaring/serverless-plugin-iam-checker/compare/v0.0.47...v1.0.0

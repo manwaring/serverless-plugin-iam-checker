@@ -20,6 +20,8 @@
 1. [Detailed validation logging](#detailed-validation-logging)
 1. [Examples](#examples)
 
+_Feedback appreciated! If you have an idea for how this plugin can be improved [please open an issue](https://github.com/manwaring/serverless-plugin-iam-checker/issues/new)._
+
 # Overview
 
 This [Serverless Framework](https://github.com/serverless/serverless) plugin checks all generated IAM resources in a serverless project and validates their permission configurations for overly-permissive actions and/or resource references. If IAM resources are invalid per the configured rules then the `sls` command will fail after the `package` step, preventing the generated CloudFormation Stack from being deployed to AWS.
