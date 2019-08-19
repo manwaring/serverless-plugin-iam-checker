@@ -64,20 +64,20 @@ resources:
 
 ## Action rules
 
-| Property            | Description                                              | Defaults | Example                                                                 |
-| ------------------- | -------------------------------------------------------- | -------- | ----------------------------------------------------------------------- |
-| Allow wildcards     | Flag to indicate if actions can include wildcards        | `false`  | config: `false` passes: `dynamodb:PutItem` fails: `dynamodb:*`          |
-| Allow wildcard only | Flag to indicate if actions can be only wildcards        | `false`  | config: `true` passes: `dynamodb:PutItem` fails: `*`                    |
-| Allowed patterns    | List of strings used to further restrict allowed actions | `[]`     | config: `['dynamodb:']` passes: `dynamodb:PutItem` fails `s3:PutObject` |
+| Property            | Description                                                        | Defaults | Example                                                                          |
+| ------------------- | ------------------------------------------------------------------ | -------- | -------------------------------------------------------------------------------- |
+| Allow wildcards     | Type: boolean<br/>Effect: can actions include wildcards (\*)       | `false`  | config: `false`<br/>passes: `dynamodb:PutItem`<br/>fails: `dynamodb:*`           |
+| Allow wildcard only | Type: boolean<br/>Effect: can actions be only wildcards (\*)       | `false`  | config: `true`<br/>passes: `dynamodb:*`<br/>fails: `*`                           |
+| Allowed patterns    | Type: string array<br/>Effect: actions must match a listed pattern | `[]`     | config: `['dynamodb:']`<br/>passes: `dynamodb:PutItem`<br/>fails: `s3:PutObject` |
 
 ## Resource rules
 
-| Property            | Description                                                                                                               | Defaults | Example                                                                                       |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------- |
-| Allow wildcards     | Flag to indicate if actions can include wildcards                                                                         | `true`   | config: `false` passes: `arn:whatever` fails: `arn:*`                                         |
-| Allow wildcard only | Flag to indicate if actions can be only wildcards                                                                         | `false`  | config: `true` passes: `arn:*` fails: `*`                                                     |
-| Allowed patterns    | List of strings used to further restrict allowed resource names                                                           | `[]`     | config: `['arn:']` passes: `arn:whatever` fails `whatever`                                    |
-| Allowed references  | List of strings used to further restrict allowed resource keys (for compound objects, e.g. ones using dynamic references) | `[]`     | config: `['Fn::Sub']` passes: `{ 'Fn::Sub': 'whatever' }` fails: `{ 'Ref': 'WhateverTable' }` |
+| Property            | Description                                                                    | Defaults | Example                                                                                      |
+| ------------------- | ------------------------------------------------------------------------------ | -------- | -------------------------------------------------------------------------------------------- |
+| Allow wildcards     | Type: boolean<br/>Effect: can resources include wildcards (\*)                 | `true`   | config: `false`<br/>passes: `arn:whatever`<br/>fails: `arn:*`                                |
+| Allow wildcard only | Type: boolean<br/>Effect: can resources be only wildcards (\*)                 | `false`  | config: `true`<br/>passes: `arn:*`<br/>fails: `*`                                            |
+| Allowed patterns    | Type: string array<br/>Effect: resources must match a listed pattern           | `[]`     | config: `['arn:']`<br/>passes: `arn:whatever`<br/>fails: `whatever`                          |
+| Allowed references  | Type: string array<br/>Effect: resource references must match a listed pattern | `[]`     | config: `['Ref']`<br/>passes: `{ 'Ref': 'whatever' }`<br/>fails: `{ 'Fn::Sub': 'whatever' }` |
 
 ## Setting rules via serverless.yml
 
