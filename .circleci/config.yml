@@ -27,7 +27,7 @@ jobs:
       - *load-cache
       - run:
           name: Install dependencies
-          command: npm i
+          command: npm ci
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
