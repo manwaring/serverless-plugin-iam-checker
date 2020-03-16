@@ -1,11 +1,31 @@
 <p align="center">
-  <img height="150" src="https://avatars0.githubusercontent.com/u/36457275?s=400&u=16d355f384ed7f8e0655b7ed1d70ff2e411690d8&v=4e">
-  <img height="150" src="https://user-images.githubusercontent.com/2955468/44874521-6cb2c980-ac69-11e8-936b-b02a3519c4ec.png">
+  <img height="140" src="https://avatars0.githubusercontent.com/u/36457275?s=400&u=16d355f384ed7f8e0655b7ed1d70ff2e411690d8&v=4e">
+  <img height="140" src="https://user-images.githubusercontent.com/2955468/44874521-6cb2c980-ac69-11e8-936b-b02a3519c4ec.png">
 </p>
 
-[![version]][version-url] [![downloads]][downloads-url] [![coverage]][coverage-url] [![size][size]][size-url] [![license]][license-url]
+<p align="center">
+  <a href="https://npmjs.com/package/@manwaring/serverless-plugin-iam-checker">
+    <img src="https://flat.badgen.net/npm/v/@manwaring/serverless-plugin-iam-checker?icon=npm&label=npm@latest"></a>
+  <a href="https://www.npmjs.com/package/@manwaring/serverless-plugin-iam-checker">
+    <img src="https://flat.badgen.net/npm/dt/@manwaring/serverless-plugin-iam-checker?icon=npm"></a>
+  <a href="https://codecov.io/gh/manwaring/serverless-plugin-iam-checker">
+    <img src="https://flat.badgen.net/codecov/c/github/manwaring/serverless-plugin-iam-checker/?icon=codecov"></a>
+  <a href="https://packagephobia.now.sh/result?p=@manwaring/serverless-plugin-iam-checker">
+    <img src="https://flat.badgen.net/packagephobia/install/@manwaring/serverless-plugin-iam-checker"></a>
+  <a href="https://www.npmjs.com/package/@manwaring/serverless-plugin-iam-checker">
+    <img src="https://flat.badgen.net/npm/license/@manwaring/serverless-plugin-iam-checker"></a>
+</p>
 
-[![build]][build-url] [![dependabot]][dependabot-url] [![dependency]][dependency-url] [![dev-dependency]][dev-dependency-url]
+<p align="center">
+  <a href="https://circleci.com/gh/manwaring/serverless-plugin-iam-checker">
+    <img src="https://flat.badgen.net/circleci/github/manwaring/serverless-plugin-iam-checker/master?icon=circleci"></a>
+  <a href="https://flat.badgen.net/dependabot/manwaring/serverless-plugin-iam-checker">
+    <img src="https://flat.badgen.net/dependabot/manwaring/serverless-plugin-iam-checker/?icon=dependabot&label=dependabot"></a>
+  <a href="https://david-dm.org/manwaring/serverless-plugin-iam-checker">
+    <img src="https://flat.badgen.net/david/dep/manwaring/serverless-plugin-iam-checker"></a>
+  <a href="https://david-dm.org/manwaring/serverless-plugin-iam-checker?type=dev">
+    <img src="https://flat.badgen.net/david/dev/manwaring/serverless-plugin-iam-checker/?label=dev+dependencies"></a>
+</p>
 
 # Serverless plugin IAM checker
 
@@ -135,29 +155,3 @@ Serverless: Checking IAM permissions...
 There is [one working example](examples) of how this package can be used in a simple 'hello world' serverless application:
 
 1. [Plugin with default configuration](examples/default)
-
-<!-- Badge icons -->
-
-[version]: https://flat.badgen.net/npm/v/serverless-plugin-iam-checker?icon=npm&label=npm@latest
-[downloads]: https://flat.badgen.net/npm/dt/serverless-plugin-iam-checker?icon=npm
-[coverage]: https://flat.badgen.net/codecov/c/github/manwaring/serverless-plugin-iam-checker/?icon=codecov
-[size]: https://flat.badgen.net/packagephobia/install/serverless-plugin-iam-checker
-[license]: https://flat.badgen.net/npm/license/serverless-plugin-iam-checker/
-[language]: https://flat.badgen.net/badge/typescript/typescript/?icon&label
-[style]: https://flat.badgen.net/badge/code%20style/prettier?color=purple&icon=terminal&label
-[build]: https://flat.badgen.net/circleci/github/manwaring/serverless-plugin-iam-checker/master?icon=circleci
-[dependabot]: https://flat.badgen.net/dependabot/manwaring/serverless-plugin-iam-checker/?icon=dependabot&label=dependabot
-[dependency]: https://flat.badgen.net/david/dep/manwaring/serverless-plugin-iam-checker
-[dev-dependency]: https://flat.badgen.net/david/dev/manwaring/serverless-plugin-iam-checker/?label=dev+dependencies
-
-<!-- Badge URLs -->
-
-[version-url]: https://npmjs.com/package/serverless-plugin-iam-checker
-[downloads-url]: https://www.npmjs.com/package/serverless-plugin-iam-checker
-[coverage-url]: https://codecov.io/gh/manwaring/serverless-plugin-iam-checker
-[size-url]: https://packagephobia.now.sh/result?p=serverless-plugin-iam-checker
-[license-url]: https://www.npmjs.com/package/serverless-plugin-iam-checker
-[build-url]: https://circleci.com/gh/manwaring/serverless-plugin-iam-checker
-[dependabot-url]: https://flat.badgen.net/dependabot/manwaring/serverless-plugin-iam-checker
-[dependency-url]: https://david-dm.org/manwaring/serverless-plugin-iam-checker
-[dev-dependency-url]: https://david-dm.org/manwaring/serverless-plugin-iam-checker?type=dev
