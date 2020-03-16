@@ -4,16 +4,16 @@
 </p>
 
 <p align="center">
-  <a href="https://npmjs.com/package/@manwaring/serverless-plugin-iam-checker">
-    <img src="https://flat.badgen.net/npm/v/@manwaring/serverless-plugin-iam-checker?icon=npm&label=npm@latest"></a>
-  <a href="https://www.npmjs.com/package/@manwaring/serverless-plugin-iam-checker">
-    <img src="https://flat.badgen.net/npm/dt/@manwaring/serverless-plugin-iam-checker?icon=npm"></a>
+  <a href="https://npmjs.com/package/serverless-plugin-iam-checker">
+    <img src="https://flat.badgen.net/npm/v/serverless-plugin-iam-checker?icon=npm&label=npm@latest"></a>
+  <a href="https://www.npmjs.com/package/serverless-plugin-iam-checker">
+    <img src="https://flat.badgen.net/npm/dt/serverless-plugin-iam-checker?icon=npm"></a>
   <a href="https://codecov.io/gh/manwaring/serverless-plugin-iam-checker">
     <img src="https://flat.badgen.net/codecov/c/github/manwaring/serverless-plugin-iam-checker/?icon=codecov"></a>
-  <a href="https://packagephobia.now.sh/result?p=@manwaring/serverless-plugin-iam-checker">
-    <img src="https://flat.badgen.net/packagephobia/install/@manwaring/serverless-plugin-iam-checker"></a>
-  <a href="https://www.npmjs.com/package/@manwaring/serverless-plugin-iam-checker">
-    <img src="https://flat.badgen.net/npm/license/@manwaring/serverless-plugin-iam-checker"></a>
+  <a href="https://packagephobia.now.sh/result?p=serverless-plugin-iam-checker">
+    <img src="https://flat.badgen.net/packagephobia/install/serverless-plugin-iam-checker"></a>
+  <a href="https://www.npmjs.com/package/serverless-plugin-iam-checker">
+    <img src="https://flat.badgen.net/npm/license/serverless-plugin-iam-checker"></a>
 </p>
 
 <p align="center">
