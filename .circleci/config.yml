@@ -100,7 +100,7 @@ workflows:
             tags:
               only: /v.*/
       - test-default-example:
-          context: manwaring-aws
+          context: aws-manwaring
           requires:
             - publish
           filters:
