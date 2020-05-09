@@ -1,7 +1,7 @@
 {
   "name": "serverless-plugin-iam-checker",
   "description": "A serverless plugin to check IAM policies for security compliance",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "scripts": {
     "publish-please-dry-run": "publish-please --dry-run",
     "publish-please": "publish-please",
@@ -38,6 +38,9 @@
   "homepage": "https://github.com/manwaring/serverless-plugin-iam-checker",
   "main": "dist/plugin.js",
   "types": "dist/plugin.d.ts",
+  "files": [
+    "/dist"
+  ],
   "author": "From Phillip with ♥",
   "license": "MIT",
   "keywords": [
