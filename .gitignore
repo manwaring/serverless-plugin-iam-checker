@@ -64,3 +64,5 @@ dist/
 
 src/**/*.js
 src/**/*.d.ts
+
+.vscode
