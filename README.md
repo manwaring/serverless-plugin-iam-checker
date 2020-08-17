@@ -155,3 +155,6 @@ Serverless: Checking IAM permissions...
 There is [one working example](examples) of how this package can be used in a simple 'hello world' serverless application:
 
 1. [Plugin with default configuration](examples/default)
+
+<img height="0" src="https://b7z7o7y5fi.execute-api.us-east-1.amazonaws.com/v1/readme/visits/github/manwaring/serverless-plugin-iam-checker?style=flat-square">
+
