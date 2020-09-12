@@ -1,110 +1,48 @@
-# Note: YAML anchors allow an object to be re-used, reducing duplication. The ampersand
-# declares an alias for an object, then later the `<<: *alias` syntax dereferences it.
-#
-# See http://blog.daemonl.com/2016/02/yaml.html and
-# https://medium.com/@kinghuang/docker-compose-anchors-aliases-extensions-a1e4105d70bd
-# for more information about how to use anchors.
-#
-# To validate changes use an online parser, eg. http://yaml-online-parser.appspot.com/
-anchors:
-  container-config: &container-config
-    docker:
-      - image: circleci/node:lts
-        environment:
-          TERM: dumb
+version: 2.1
 
-  load-cache: &load-cache
-    restore_cache:
-      key: dependency-cache-{{ checksum "package.json" }}
+orbs:
+  node: circleci/node@4.0.0
 
-## Circle CI configuration, see https://circleci.com/docs/2.0/configuration-reference/
-version: 2
 jobs:
-  install:
-    <<: *container-config
-    steps:
-      - checkout
-      - *load-cache
-      - run:
-          name: Install dependencies
-          command: npm ci
-      - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
-          paths:
-            - node_modules
-
-  test:
-    <<: *container-config
-    steps:
-      - checkout
-      - *load-cache
-      - run:
-          name: Test
-          command: npm test
-      - store_artifacts:
-          path: coverage
-      - run:
-          name: Send coverage to Codecov
-          command: npm run codecov
-
   publish:
-    <<: *container-config
+    executor: &node-lts
+      name: node/default
+      tag: lts
     steps:
       - checkout
-      - *load-cache
+      - node/install-packages
       - run:
-          name: Set npm credentials
-          command: echo "//registry.npmjs.org/:_authToken=$NPM_PUBLISH_TOKEN" >> ~/.npmrc
-      - run:
-          name: Publish to npm
+          name: Publish on npm
           command: npm run publish-please
 
   test-default-example:
-    <<: *container-config
+    executor: *node-lts
     steps:
       - checkout
-      - *load-cache
+      - node/install-packages
       - run:
-          name: Package default app
+          name: Deploy and test default example app
           command: npm run test-default-example
-
+      
 workflows:
   version: 2
 
   test-and-publish:
     jobs:
-      - install:
+      - node/test:
+          version: lts
           filters:
             tags:
               only: /.*/
-      - test:
-          requires:
-            - install
-          filters:
-            tags:
-              only: /.*/
-      # TODO add a dry-run step to non-tagged changes
-      # - publish-dry-run:
-      #     requires:
-      #       - test
-      #     filters:
-      #       tags:
-      #         only: /.*/
       - publish:
           context: manwaring-npm
-          requires:
-            - test
-          filters:
+          requires: [node/test]
+          filters: &only-versioned-tags
             branches:
               ignore: /.*/
             tags:
               only: /v.*/
       - test-default-example:
           context: aws-manwaring
-          requires:
-            - publish
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /v.*/
+          requires: [publish]
+          filters: *only-versioned-tags
