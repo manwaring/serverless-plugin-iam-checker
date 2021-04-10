@@ -1,7 +1,7 @@
 {
   "name": "serverless-plugin-iam-checker",
   "description": "A serverless plugin to check IAM policies for security compliance",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "scripts": {
     "publish-please-dry-run": "publish-please --dry-run",
     "publish-please": "publish-please",
@@ -13,17 +13,17 @@
     "test-default-example": "cd examples/default && rm -rf node_modules package-lock.json && npm i && npm run package"
   },
   "devDependencies": {
-    "@types/node": "^14.11.2",
-    "chai": "^4.2.0",
-    "codecov": "^3.7.2",
+    "@types/node": "^14.14.37",
+    "chai": "^4.3.4",
+    "codecov": "^3.8.1",
     "cucumber": "^6.0.5",
     "cucumber-pretty": "^6.0.0",
     "cucumber-tsflow": "^3.4.1",
     "nyc": "^15.1.0",
-    "publish-please": "^5.5.1",
+    "publish-please": "^5.5.2",
     "rimraf": "^3.0.2",
-    "ts-node": "^9.0.0",
-    "typescript": "^4.0.3"
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.4"
   },
   "publishConfig": {
     "access": "public"
